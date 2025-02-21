@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "512411755807",
+    "project_id": "saadhanaapp",
+    "storage_bucket": "saadhanaapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512411755807:android:1c6915e41e31f58d80bc2a",
+        "android_client_info": {
+          "package_name": "com.devstudu.saadhana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512411755807-i7tlaforbmqcb8b3isp53huf262ma9u4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devstudu.saadhana",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "512411755807-sqmnqklicfaivbq10ksrq5m0erv7q2m3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvYVVEvn1SgngNfP9U-pTjI1r9YEgYDdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512411755807-sqmnqklicfaivbq10ksrq5m0erv7q2m3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "512411755807-1t7e0uopdb1coimmeelkd0nk9hhps1ia.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.devstudu.saadhana"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
