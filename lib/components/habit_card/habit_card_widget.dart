@@ -49,7 +49,7 @@ class _HabitCardWidgetState extends State<HabitCardWidget> {
     context.watch<FFAppState>();
 
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 24.0),
+      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 2.0),
       child: InkWell(
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
@@ -97,62 +97,68 @@ class _HabitCardWidgetState extends State<HabitCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            width: 100.0,
-                            height: 100.0,
-                            constraints: BoxConstraints(
-                              maxWidth: 40.0,
-                              maxHeight: 40.0,
-                            ),
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).secondary,
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Text(
-                              valueOrDefault<String>(
-                                FFAppState()
-                                    .userhabit
-                                    .elementAtOrNull(widget.index!)
-                                    ?.title,
-                                'H',
-                              ).maybeHandleOverflow(
-                                maxChars: 1,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .titleLarge
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context).accent4,
-                                    letterSpacing: 0.0,
+                      Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Container(
+                                width: 100.0,
+                                height: 100.0,
+                                constraints: BoxConstraints(
+                                  maxWidth: 40.0,
+                                  maxHeight: 40.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  borderRadius: BorderRadius.circular(6.0),
+                                ),
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    FFAppState()
+                                        .userhabit
+                                        .elementAtOrNull(widget.index!)
+                                        ?.title,
+                                    'H',
+                                  ).maybeHandleOverflow(
+                                    maxChars: 1,
                                   ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                5.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              valueOrDefault<String>(
-                                FFAppState()
-                                    .userhabit
-                                    .elementAtOrNull(widget.index!)
-                                    ?.title,
-                                'Habit Name',
-                              ).maybeHandleOverflow(
-                                maxChars: 23,
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent4,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyLarge
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    FFAppState()
+                                        .userhabit
+                                        .elementAtOrNull(widget.index!)
+                                        ?.title,
+                                    'Habit Name',
+                                  ).maybeHandleOverflow(
+                                    maxChars: 23,
                                   ),
-                            ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,

@@ -209,8 +209,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
               if (FFAppState().userhabit.length <= 3)
                 FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    logFirebaseEvent('HOME_START_GOOD_HABITS_BTN_ON_TAP');
+                    logFirebaseEvent('Button_navigate_to');
+
+                    context.pushNamed(
+                      CreateHabitWidget.routeName,
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.bottomToTop,
+                        ),
+                      },
+                    );
                   },
                   text: FFLocalizations.of(context).getText(
                     'uvyli3xa' /* Start Good Habits */,

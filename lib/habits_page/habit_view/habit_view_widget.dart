@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -387,58 +388,71 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(1.0, 0.0),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 5.0, 10.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Align(
-                                    alignment: AlignmentDirectional(-1.0, -1.0),
-                                    child: Text(
-                                      valueOrDefault<String>(
-                                        FFAppState()
-                                            .userhabit
-                                            .elementAtOrNull(widget.index!)
-                                            ?.title,
-                                        'Habit Name',
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily: 'Open Sans',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
+                                  0.0, 5.0, 5.0, 0.0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  dateTimeFormat(
+                                    "relative",
+                                    FFAppState()
+                                        .userhabit
+                                        .elementAtOrNull(widget.index!)
+                                        ?.createDate,
+                                    locale: FFLocalizations.of(context)
+                                        .languageCode,
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0.0, 1.0),
-                                    child: Text(
-                                      valueOrDefault<String>(
-                                        dateTimeFormat(
-                                          "relative",
-                                          FFAppState()
-                                              .userhabit
-                                              .elementAtOrNull(widget.index!)
-                                              ?.createDate,
-                                          locale: FFLocalizations.of(context)
-                                              .languageCode,
+                                  'Created date',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 5.0, 10.0, 0.0),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.0, -1.0),
+                                        child: AutoSizeText(
+                                          valueOrDefault<String>(
+                                            FFAppState()
+                                                .userhabit
+                                                .elementAtOrNull(widget.index!)
+                                                ?.title,
+                                            'Habit Name',
+                                          ).maybeHandleOverflow(
+                                            maxChars: 30,
+                                            replacement: '…',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineSmall
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
-                                        'Created date',
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
