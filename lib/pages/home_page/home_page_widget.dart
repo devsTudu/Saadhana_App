@@ -1,10 +1,13 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/components/habit_card/habit_card_widget.dart';
+import '/components/journal_card_special/journal_card_special_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -19,7 +22,8 @@ class HomePageWidget extends StatefulWidget {
   State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
+class _HomePageWidgetState extends State<HomePageWidget>
+    with TickerProviderStateMixin {
   late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -30,6 +34,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     _model = createModel(context, () => HomePageModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomePage'});
+    _model.tabBarController = TabController(
+      vsync: this,
+      length: 2,
+      initialIndex: 0,
+    )..addListener(() => safeSetState(() {}));
   }
 
   @override
@@ -51,97 +60,90 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            logFirebaseEvent('HOME_FloatingActionButton_gkmo48zf_ON_TA');
-            logFirebaseEvent('FloatingActionButton_navigate_to');
+        floatingActionButton: Align(
+          alignment: AlignmentDirectional(1.0, 1.0),
+          child: FloatingActionButton(
+            onPressed: () async {
+              logFirebaseEvent('HOME_FloatingActionButton_gkmo48zf_ON_TA');
+              if (_model.tabBarCurrentIndex == 0) {
+                logFirebaseEvent('FloatingActionButton_navigate_to');
 
-            context.pushNamed(
-              CreateHabitWidget.routeName,
-              extra: <String, dynamic>{
-                kTransitionInfoKey: TransitionInfo(
-                  hasTransition: true,
-                  transitionType: PageTransitionType.bottomToTop,
-                ),
-              },
-            );
-          },
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          elevation: 8.0,
-          child: Icon(
-            Icons.add_rounded,
-            color: FlutterFlowTheme.of(context).info,
-            size: 24.0,
+                context.pushNamed(
+                  CreateHabitWidget.routeName,
+                  extra: <String, dynamic>{
+                    kTransitionInfoKey: TransitionInfo(
+                      hasTransition: true,
+                      transitionType: PageTransitionType.bottomToTop,
+                    ),
+                  },
+                );
+              }
+            },
+            backgroundColor: FlutterFlowTheme.of(context).primary,
+            elevation: 8.0,
+            child: Icon(
+              Icons.add_rounded,
+              color: FlutterFlowTheme.of(context).info,
+              size: 24.0,
+            ),
           ),
         ),
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          title: SafeArea(
-            child: ClipRRect(
-              child: Container(
-                width: 311.6,
-                height: 60.5,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
-                      child: Text(
-                        FFLocalizations.of(context).getText(
-                          'dvrbf49j' /* Habit */,
-                        ),
-                        style: FlutterFlowTheme.of(context)
-                            .displayMedium
-                            .override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              letterSpacing: 0.0,
-                            ),
+          title: Align(
+            alignment: AlignmentDirectional(-1.0, 0.0),
+            child: SafeArea(
+              child: ClipRRect(
+                child: Container(
+                  width: 311.6,
+                  height: 60.5,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                  ),
+                  child: Align(
+                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    child: Text(
+                      FFLocalizations.of(context).getText(
+                        'flqghbel' /* Saadhana */,
                       ),
+                      textAlign: TextAlign.start,
+                      style: FlutterFlowTheme.of(context).displaySmall.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
           actions: [
-            Align(
-              alignment: AlignmentDirectional(1.0, 0.0),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                child: AuthUserStreamWidget(
-                  builder: (context) => InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      logFirebaseEvent('HOME_CircleImage_w3tos318_ON_TAP');
-                      logFirebaseEvent('CircleImage_navigate_to');
-
-                      context.pushNamed(ProfileWidget.routeName);
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.network(
-                        valueOrDefault<String>(
-                          currentUserPhoto,
-                          'https://picsum.photos/seed/488/600',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+              child: FlutterFlowIconButton(
+                borderRadius: 8.0,
+                buttonSize: 40.0,
+                icon: Icon(
+                  Icons.settings_sharp,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 24.0,
                 ),
+                onPressed: () async {
+                  logFirebaseEvent('HOME_PAGE_PAGE_settings_sharp_ICN_ON_TAP');
+                  logFirebaseEvent('IconButton_navigate_to');
+
+                  context.pushNamed(
+                    ProfileWidget.routeName,
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.rightToLeft,
+                        duration: Duration(milliseconds: 100),
+                      ),
+                    },
+                  );
+                },
               ),
             ),
           ],
@@ -153,101 +155,238 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              SingleChildScrollView(
-                primary: false,
+              Expanded(
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                      child: SingleChildScrollView(
-                        primary: false,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Builder(
-                              builder: (context) {
-                                final habits = FFAppState()
-                                    .userhabit
-                                    .map((e) => e)
-                                    .toList();
+                    Align(
+                      alignment: Alignment(0.0, 0),
+                      child: TabBar(
+                        labelColor: FlutterFlowTheme.of(context).primaryText,
+                        unselectedLabelColor:
+                            FlutterFlowTheme.of(context).secondaryText,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                        unselectedLabelStyle:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                        indicatorColor: FlutterFlowTheme.of(context).primary,
+                        tabs: [
+                          Tab(
+                            text: FFLocalizations.of(context).getText(
+                              'b82kqhdm' /* Habits */,
+                            ),
+                            icon: Icon(
+                              Icons.star,
+                            ),
+                          ),
+                          Tab(
+                            text: FFLocalizations.of(context).getText(
+                              'vdct67z7' /* Diary */,
+                            ),
+                            icon: Icon(
+                              Icons.history_edu,
+                            ),
+                          ),
+                        ],
+                        controller: _model.tabBarController,
+                        onTap: (i) async {
+                          [() async {}, () async {}][i]();
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        controller: _model.tabBarController,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(0.0, -1.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                SingleChildScrollView(
+                                  primary: false,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 10.0, 0.0, 0.0),
+                                        child: SingleChildScrollView(
+                                          primary: false,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Builder(
+                                                builder: (context) {
+                                                  final habits = FFAppState()
+                                                      .userhabit
+                                                      .map((e) => e)
+                                                      .toList();
 
-                                return ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: habits.length,
-                                  itemBuilder: (context, habitsIndex) {
-                                    final habitsItem = habits[habitsIndex];
-                                    return wrapWithModel(
-                                      model: _model.habitCardModels.getModel(
-                                        habitsIndex.toString(),
-                                        habitsIndex,
-                                      ),
-                                      updateCallback: () => safeSetState(() {}),
-                                      child: HabitCardWidget(
-                                        key: Key(
-                                          'Key4x1_${habitsIndex.toString()}',
+                                                  return ListView.builder(
+                                                    padding: EdgeInsets.zero,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemCount: habits.length,
+                                                    itemBuilder:
+                                                        (context, habitsIndex) {
+                                                      final habitsItem =
+                                                          habits[habitsIndex];
+                                                      return wrapWithModel(
+                                                        model: _model
+                                                            .habitCardModels
+                                                            .getModel(
+                                                          habitsIndex
+                                                              .toString(),
+                                                          habitsIndex,
+                                                        ),
+                                                        updateCallback: () =>
+                                                            safeSetState(() {}),
+                                                        child: HabitCardWidget(
+                                                          key: Key(
+                                                            'Key4x1_${habitsIndex.toString()}',
+                                                          ),
+                                                          index: habitsIndex,
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ]
+                                                .divide(SizedBox(height: 2.0))
+                                                .addToStart(
+                                                    SizedBox(height: 3.0)),
+                                          ),
                                         ),
-                                        index: habitsIndex,
                                       ),
+                                    ],
+                                  ),
+                                ),
+                                if (FFAppState().userhabit.length <= 2)
+                                  Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 30.0, 0.0, 0.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent(
+                                              'HOME_PAGE_PAGE_NEW_HABIT_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_navigate_to');
+
+                                          context.pushNamed(
+                                            CreateHabitWidget.routeName,
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType
+                                                        .bottomToTop,
+                                              ),
+                                            },
+                                          );
+                                        },
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'uvyli3xa' /* New Habit */,
+                                        ),
+                                        icon: Icon(
+                                          Icons.plus_one,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          size: 30.0,
+                                        ),
+                                        options: FFButtonOptions(
+                                          height: 51.5,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 16.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .accent2,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .headlineLarge
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                              ),
+                                          elevation: 0.0,
+                                          borderRadius:
+                                              BorderRadius.circular(16.0),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Builder(
+                                  builder: (context) {
+                                    final journal = functions
+                                        .arrayOfJournalIndexes(
+                                            FFAppState().userhabit.toList())
+                                        .toList();
+
+                                    return MasonryGridView.builder(
+                                      gridDelegate:
+                                          SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                      ),
+                                      crossAxisSpacing: 10.0,
+                                      mainAxisSpacing: 10.0,
+                                      itemCount: journal.length,
+                                      itemBuilder: (context, journalIndex) {
+                                        final journalItem =
+                                            journal[journalIndex];
+                                        return wrapWithModel(
+                                          model: _model.journalCardSpecialModels
+                                              .getModel(
+                                            journalIndex.toString(),
+                                            journalIndex,
+                                          ),
+                                          updateCallback: () =>
+                                              safeSetState(() {}),
+                                          child: JournalCardSpecialWidget(
+                                            key: Key(
+                                              'Key9s7_${journalIndex.toString()}',
+                                            ),
+                                            journalAddress: journalItem,
+                                          ),
+                                        );
+                                      },
                                     );
                                   },
-                                );
-                              },
-                            ),
-                          ]
-                              .divide(SizedBox(height: 2.0))
-                              .addToStart(SizedBox(height: 3.0)),
-                        ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-              if (FFAppState().userhabit.length <= 3)
-                FFButtonWidget(
-                  onPressed: () async {
-                    logFirebaseEvent('HOME_START_GOOD_HABITS_BTN_ON_TAP');
-                    logFirebaseEvent('Button_navigate_to');
-
-                    context.pushNamed(
-                      CreateHabitWidget.routeName,
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.bottomToTop,
-                        ),
-                      },
-                    );
-                  },
-                  text: FFLocalizations.of(context).getText(
-                    'uvyli3xa' /* Start Good Habits */,
-                  ),
-                  icon: Icon(
-                    Icons.plus_one,
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    size: 30.0,
-                  ),
-                  options: FFButtonOptions(
-                    height: 51.51,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).success,
-                    textStyle:
-                        FlutterFlowTheme.of(context).headlineLarge.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.of(context).alternate,
-                              letterSpacing: 0.0,
-                            ),
-                    elevation: 0.0,
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                ),
             ],
           ),
         ),

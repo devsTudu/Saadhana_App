@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -137,7 +138,7 @@ class _AskAIPageWidgetState extends State<AskAIPageWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .headlineSmall
                                     .override(
-                                      fontFamily: 'Open Sans',
+                                      fontFamily: 'Inter',
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -147,27 +148,25 @@ class _AskAIPageWidgetState extends State<AskAIPageWidget> {
                                   0.0, 0.0, 16.0, 0.0),
                               child: FlutterFlowDropDown<String>(
                                 controller: _model.dropDownValueController ??=
-                                    FormFieldController<String>(
-                                  _model.dropDownValue ??=
-                                      FFLocalizations.of(context).getText(
-                                    'v3ccgvjx' /* Motivation */,
-                                  ),
-                                ),
-                                options: (getJsonField(
-                                  FFAppState().AIData,
-                                  r'''$["type_comments"]''',
-                                  true,
-                                ) as List)
-                                    .map<String>((s) => s.toString())
-                                    .toList(),
-                                onChanged: (val) => safeSetState(
-                                    () => _model.dropDownValue = val),
+                                    FormFieldController<String>(null),
+                                options:
+                                    AIMood.values.map((e) => e.name).toList(),
+                                onChanged: (val) async {
+                                  safeSetState(
+                                      () => _model.dropDownValue = val);
+                                  logFirebaseEvent(
+                                      'ASK_A_I_DropDown_ert1xgsl_ON_FORM_WIDGET');
+                                  logFirebaseEvent(
+                                      'DropDown_update_component_state');
+                                  _model.mood = _model.dropDownValue;
+                                  safeSetState(() {});
+                                },
                                 width: 120.0,
                                 height: 40.0,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
                                 hintText: FFLocalizations.of(context).getText(
@@ -210,74 +209,79 @@ class _AskAIPageWidgetState extends State<AskAIPageWidget> {
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
-                        child: Container(
-                          width: 200.0,
-                          child: TextFormField(
-                            controller: _model.askingTextTextController,
-                            focusNode: _model.askingTextFocusNode,
-                            autofocus: true,
-                            textInputAction: TextInputAction.go,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              isDense: true,
-                              labelText: FFLocalizations.of(context).getText(
-                                'gzy6xavs' /* Question */,
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Container(
+                            width: 200.0,
+                            child: TextFormField(
+                              controller: _model.askingTextTextController,
+                              focusNode: _model.askingTextFocusNode,
+                              autofocus: true,
+                              textInputAction: TextInputAction.go,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                labelText: FFLocalizations.of(context).getText(
+                                  'gzy6xavs' /* Question */,
+                                ),
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
                               ),
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              maxLines: 2,
+                              maxLength: 60,
+                              cursorColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              validator: _model
+                                  .askingTextTextControllerValidator
+                                  .asValidator(context),
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  letterSpacing: 0.0,
-                                ),
-                            maxLength: 60,
-                            cursorColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                            validator: _model.askingTextTextControllerValidator
-                                .asValidator(context),
                           ),
                         ),
                       ),
@@ -319,7 +323,7 @@ class _AskAIPageWidgetState extends State<AskAIPageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Readex Pro',
                                         letterSpacing: 0.0,
                                       ),
                                 ),
@@ -361,7 +365,7 @@ class _AskAIPageWidgetState extends State<AskAIPageWidget> {
                                       .elementAtOrNull(widget.index!)
                                       ?.description,
                                   'I will do it daily',
-                                )}\", now I want a reply for \"${_model.askingTextTextController.text}\", in the mood of \"${_model.dropDownValue}\".';
+                                )}\", now I want a reply for \"${_model.askingTextTextController.text}\", in the mood of \"${_model.mood}\".';
                                 safeSetState(() {});
                                 logFirebaseEvent('submit_btn_backend_call');
                                 _model.commentByAi = await GeminiCall.call(
@@ -417,7 +421,7 @@ class _AskAIPageWidgetState extends State<AskAIPageWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Readex Pro',
                                             color: FlutterFlowTheme.of(context)
                                                 .secondary,
                                             letterSpacing: 0.0,

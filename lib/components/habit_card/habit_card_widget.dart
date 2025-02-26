@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +47,7 @@ class _HabitCardWidgetState extends State<HabitCardWidget> {
     context.watch<FFAppState>();
 
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 2.0),
+      padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 3.0, 5.0),
       child: InkWell(
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
@@ -77,10 +75,7 @@ class _HabitCardWidgetState extends State<HabitCardWidget> {
               BoxShadow(
                 blurRadius: 3.0,
                 color: Color(0x33000000),
-                offset: Offset(
-                  0.0,
-                  1.0,
-                ),
+                offset: Offset(0.0, 0.0),
               )
             ],
             borderRadius: BorderRadius.circular(8.0),
@@ -128,136 +123,108 @@ class _HabitCardWidgetState extends State<HabitCardWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .titleLarge
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Readex Pro',
                                         color: FlutterFlowTheme.of(context)
                                             .accent4,
                                         letterSpacing: 0.0,
                                       ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    FFAppState()
-                                        .userhabit
-                                        .elementAtOrNull(widget.index!)
-                                        ?.title,
-                                    'Habit Name',
-                                  ).maybeHandleOverflow(
-                                    maxChars: 23,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
+                              Flexible(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 0.0, 0.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.0, 0.0),
+                                        child: Text(
+                                          valueOrDefault<String>(
+                                            FFAppState()
+                                                .userhabit
+                                                .elementAtOrNull(widget.index!)
+                                                ?.title,
+                                            'Habit Name',
+                                          ).maybeHandleOverflow(
+                                            maxChars: 23,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
                                       ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.0, 0.0),
+                                        child: AutoSizeText(
+                                          valueOrDefault<String>(
+                                            FFAppState()
+                                                .userhabit
+                                                .elementAtOrNull(widget.index!)
+                                                ?.journal
+                                                .lastOrNull
+                                                ?.contentJournal,
+                                            'Last Comment',
+                                          ).maybeHandleOverflow(
+                                            maxChars: 35,
+                                            replacement: '…',
+                                          ),
+                                          textAlign: TextAlign.start,
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      Column(
+                      Row(
                         mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 4.0, 0.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    FFAppState()
-                                        .userhabit
-                                        .elementAtOrNull(widget.index!)
-                                        ?.score
-                                        .toString(),
-                                    '4.5',
-                                  ).maybeHandleOverflow(
-                                    maxChars: 3,
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 4.0, 0.0),
+                            child: Text(
+                              valueOrDefault<String>(
+                                FFAppState()
+                                    .userhabit
+                                    .elementAtOrNull(widget.index!)
+                                    ?.score
+                                    .toString(),
+                                '4.5',
+                              ).maybeHandleOverflow(
+                                maxChars: 3,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium
-                                      .override(
-                                        fontFamily: 'Open Sans',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                              Icon(
-                                Icons.star_rounded,
-                                color: Color(0xFF4B39EF),
-                                size: 20.0,
-                              ),
-                            ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.star_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 20.0,
                           ),
                         ],
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(2.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional(-1.0, -1.0),
-                        child: AutoSizeText(
-                          valueOrDefault<String>(
-                            FFAppState()
-                                .userhabit
-                                .elementAtOrNull(widget.index!)
-                                ?.journal
-                                .lastOrNull
-                                ?.contentJournal,
-                            'Last Comment',
-                          ).maybeHandleOverflow(
-                            maxChars: 35,
-                            replacement: '…',
-                          ),
-                          textAlign: TextAlign.start,
-                          style:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                      ),
-                      badges.Badge(
-                        badgeContent: Text(
-                          valueOrDefault<String>(
-                            functions
-                                .numberOfTimesToday(FFAppState()
-                                    .userhabit
-                                    .elementAtOrNull(widget.index!)!
-                                    .dates
-                                    .toList())
-                                .toString(),
-                            '0',
-                          ),
-                          textAlign: TextAlign.center,
-                          style:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Inter',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        showBadge: true,
-                        shape: badges.BadgeShape.circle,
-                        badgeColor: FlutterFlowTheme.of(context).primary,
-                        elevation: 1.0,
-                        padding: EdgeInsets.all(6.0),
-                        position: badges.BadgePosition.topStart(),
-                        animationType: badges.BadgeAnimationType.scale,
-                        toAnimate: false,
                       ),
                     ],
                   ),

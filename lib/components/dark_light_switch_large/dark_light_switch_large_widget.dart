@@ -130,7 +130,7 @@ class _DarkLightSwitchLargeWidgetState extends State<DarkLightSwitchLargeWidget>
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: 'Inter',
+                                fontFamily: 'Readex Pro',
                                 color: Theme.of(context).brightness ==
                                         Brightness.light
                                     ? FlutterFlowTheme.of(context).primaryText
@@ -195,7 +195,7 @@ class _DarkLightSwitchLargeWidgetState extends State<DarkLightSwitchLargeWidget>
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: 'Inter',
+                                fontFamily: 'Readex Pro',
                                 color: Theme.of(context).brightness ==
                                         Brightness.dark
                                     ? FlutterFlowTheme.of(context).primaryText

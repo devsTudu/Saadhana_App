@@ -107,7 +107,7 @@ class _JournalPageWidgetState extends State<JournalPageWidget> {
                         ),
                         style:
                             FlutterFlowTheme.of(context).headlineSmall.override(
-                                  fontFamily: 'Open Sans',
+                                  fontFamily: 'Inter',
                                   letterSpacing: 0.0,
                                 ),
                       ),
@@ -191,7 +191,7 @@ class _JournalPageWidgetState extends State<JournalPageWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Readex Pro',
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
                                   letterSpacing: 0.0,
@@ -223,7 +223,7 @@ class _JournalPageWidgetState extends State<JournalPageWidget> {
                       'zgn6e5du' /* In this habit I can... because... */,
                     ),
                     hintStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Readex Pro',
                           letterSpacing: 0.0,
                         ),
                     enabledBorder: OutlineInputBorder(
@@ -258,7 +258,7 @@ class _JournalPageWidgetState extends State<JournalPageWidget> {
                         EdgeInsetsDirectional.fromSTEB(20.0, 32.0, 20.0, 12.0),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Inter',
+                        fontFamily: 'Readex Pro',
                         letterSpacing: 0.0,
                       ),
                   textAlign: TextAlign.start,
@@ -285,7 +285,7 @@ class _JournalPageWidgetState extends State<JournalPageWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).labelSmall.override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
                         ),

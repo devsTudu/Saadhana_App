@@ -239,7 +239,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                   'ztln9x0f' /* Habit Details */,
                 ),
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Open Sans',
+                      fontFamily: 'Inter',
                       letterSpacing: 0.0,
                     ),
               ),
@@ -260,7 +260,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                       locale: FFLocalizations.of(context).languageCode,
                     )}',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Readex Pro',
                           letterSpacing: 0.0,
                         ),
                   ),
@@ -408,7 +408,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -445,7 +445,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall
                                               .override(
-                                                fontFamily: 'Open Sans',
+                                                fontFamily: 'Inter',
                                                 letterSpacing: 0.0,
                                               ),
                                         ),
@@ -474,7 +474,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Inter',
+                                          fontFamily: 'Readex Pro',
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -496,7 +496,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Readex Pro',
                                         letterSpacing: 0.0,
                                       ),
                                 ),
@@ -726,7 +726,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Readex Pro',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
                                             letterSpacing: 0.0,
@@ -739,7 +739,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Readex Pro',
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -751,7 +751,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Readex Pro',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
                                             letterSpacing: 0.0,
@@ -764,7 +764,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Readex Pro',
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -831,7 +831,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .labelLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Readex Pro',
                                                 letterSpacing: 0.0,
                                               ),
                                         ),

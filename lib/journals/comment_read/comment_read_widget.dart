@@ -84,7 +84,7 @@ class _CommentReadWidgetState extends State<CommentReadWidget> {
               'Habit Name',
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'Inter',
                   color: Colors.white,
                   fontSize: 22.0,
                   letterSpacing: 0.0,

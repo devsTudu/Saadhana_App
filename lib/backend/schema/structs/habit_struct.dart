@@ -86,7 +86,7 @@ class HabitStruct extends FFFirebaseStruct {
 
   // "score" field.
   double? _score;
-  double get score => _score ?? 30.0;
+  double get score => _score ?? 0.0;
   set score(double? val) => _score = val;
 
   void incrementScore(double amount) => score = score + amount;

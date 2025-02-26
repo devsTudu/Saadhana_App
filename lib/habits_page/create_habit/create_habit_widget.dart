@@ -104,7 +104,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .headlineMedium
                                                 .override(
-                                                  fontFamily: 'Open Sans',
+                                                  fontFamily: 'Inter',
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -174,7 +174,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                           focusNode: _model.taskFocusNode,
                                           autofocus: true,
                                           textCapitalization:
-                                              TextCapitalization.words,
+                                              TextCapitalization.sentences,
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText:
@@ -186,7 +186,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .headlineMedium
                                                     .override(
-                                                      fontFamily: 'Open Sans',
+                                                      fontFamily: 'Inter',
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -197,14 +197,14 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily: 'Readex Pro',
                                                       letterSpacing: 0.0,
                                                     ),
                                             errorStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily: 'Readex Pro',
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -264,7 +264,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
                                               .override(
-                                                fontFamily: 'Open Sans',
+                                                fontFamily: 'Inter',
                                                 letterSpacing: 0.0,
                                               ),
                                           cursorColor:
@@ -331,7 +331,8 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily:
+                                                            'Readex Pro',
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -362,7 +363,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .override(
-                                                    fontFamily: 'Inter',
+                                                    fontFamily: 'Readex Pro',
                                                     letterSpacing: 0.0,
                                                   ),
                                           alignLabelWithHint: true,
@@ -370,14 +371,14 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Inter',
+                                                    fontFamily: 'Readex Pro',
                                                     letterSpacing: 0.0,
                                                   ),
                                           errorStyle: FlutterFlowTheme.of(
                                                   context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Readex Pro',
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .error,
@@ -436,7 +437,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Readex Pro',
                                               letterSpacing: 0.0,
                                             ),
                                         maxLines: 9,
@@ -455,7 +456,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .labelMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Readex Pro',
                                               letterSpacing: 0.0,
                                             ),
                                       ),
@@ -476,17 +477,16 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                               backgroundColor:
                                                   FlutterFlowTheme.of(context)
                                                       .accent2,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    letterSpacing: 0.0,
+                                                  ),
                                               iconColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
@@ -503,17 +503,16 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                               backgroundColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    letterSpacing: 0.0,
+                                                  ),
                                               iconColor:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
@@ -553,7 +552,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium
                                                 .override(
-                                                  fontFamily: 'Inter',
+                                                  fontFamily: 'Readex Pro',
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -644,7 +643,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                                                   .headlineMedium
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Open Sans',
+                                                                        'Inter',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .primaryText,
@@ -720,7 +719,8 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                                                           context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily:
+                                                            'Readex Pro',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -801,7 +801,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Readex Pro',
                                   color: Colors.white,
                                   letterSpacing: 0.0,
                                 ),

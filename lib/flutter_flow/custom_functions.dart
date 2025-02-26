@@ -79,3 +79,26 @@ String combineAllComments(List<JournalsStruct>? journals) {
   // return a string that joins all the values for content in the list of journals, and separates them with ','
   return journals?.map((journal) => journal.contentJournal).join(', ') ?? '';
 }
+
+int valueCalculate(
+  int balance,
+  int price,
+) {
+  return balance ~/ price;
+}
+
+List<JournalAddressStruct> arrayOfJournalIndexes(List<HabitStruct> habitList) {
+// for each and every habit in the list, take the indexes of the habits and there individual journals
+  List<JournalAddressStruct> journalIndexes = [];
+
+  for (int i = 0; i < habitList.length; i++) {
+    HabitStruct habit = habitList[i];
+    for (int j = 0; j < habit.journal.length; j++) {
+      JournalAddressStruct journalIndex =
+          JournalAddressStruct(habitidx: i, journalidx: j);
+      journalIndexes.add(journalIndex);
+    }
+  }
+
+  return journalIndexes;
+}

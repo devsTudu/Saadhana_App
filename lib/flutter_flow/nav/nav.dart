@@ -77,13 +77,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : Auth1Widget(),
+          appStateNotifier.loggedIn ? HomePageWidget() : StartPage1Widget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomePageWidget() : Auth1Widget(),
+              appStateNotifier.loggedIn ? HomePageWidget() : StartPage1Widget(),
         ),
         FFRoute(
           name: HomePageWidget.routeName,
@@ -133,6 +133,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: ProfileEditWidget.routeName,
           path: ProfileEditWidget.routePath,
           builder: (context, params) => ProfileEditWidget(),
+        ),
+        FFRoute(
+          name: BalancePageWidget.routeName,
+          path: BalancePageWidget.routePath,
+          builder: (context, params) => BalancePageWidget(),
+        ),
+        FFRoute(
+          name: WorkinZoneWidget.routeName,
+          path: WorkinZoneWidget.routePath,
+          builder: (context, params) => WorkinZoneWidget(),
+        ),
+        FFRoute(
+          name: StartPage1Widget.routeName,
+          path: StartPage1Widget.routePath,
+          builder: (context, params) => StartPage1Widget(),
+        ),
+        FFRoute(
+          name: StartPageAddHabitsWidget.routeName,
+          path: StartPageAddHabitsWidget.routePath,
+          builder: (context, params) => StartPageAddHabitsWidget(),
+        ),
+        FFRoute(
+          name: AddJournalsWidget.routeName,
+          path: AddJournalsWidget.routePath,
+          builder: (context, params) => AddJournalsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -305,7 +330,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/auth1';
+            return '/startPage1';
           }
           return null;
         },

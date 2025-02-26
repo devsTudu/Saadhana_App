@@ -36,17 +36,25 @@ class FFAppState extends ChangeNotifier {
           _userhabit;
     });
     await _safeInitAsync(() async {
-      if (await secureStorage.read(key: 'ff_AIData') != null) {
-        try {
-          _AIData =
-              jsonDecode(await secureStorage.getString('ff_AIData') ?? '');
-        } catch (e) {
-          print("Can't decode persisted json. Error: $e.");
-        }
-      }
+      _isDarkMode = await secureStorage.getBool('ff_isDarkMode') ?? _isDarkMode;
     });
     await _safeInitAsync(() async {
-      _isDarkMode = await secureStorage.getBool('ff_isDarkMode') ?? _isDarkMode;
+      _username = await secureStorage.getString('ff_username') ?? _username;
+    });
+    await _safeInitAsync(() async {
+      _journalswritten =
+          (await secureStorage.getStringList('ff_journalswritten'))
+                  ?.map((x) {
+                    try {
+                      return JournalsStruct.fromSerializableMap(jsonDecode(x));
+                    } catch (e) {
+                      print("Can't decode persisted data type. Error: $e.");
+                      return null;
+                    }
+                  })
+                  .withoutNulls
+                  .toList() ??
+              _journalswritten;
     });
   }
 
@@ -58,10 +66,7 @@ class FFAppState extends ChangeNotifier {
   late FlutterSecureStorage secureStorage;
 
   /// List of habits
-  List<HabitStruct> _userhabit = [
-    HabitStruct.fromSerializableMap(jsonDecode(
-        '{\"Title\":\"Wake Up early\",\"description\":\"Waking up early by 5 am\",\"dates\":\"[\\\"1739519160000\\\",\\\"1739432820000\\\",\\\"1739173620000\\\"]\",\"journal\":\"[\\\"{\\\\\\\"date\\\\\\\":\\\\\\\"1739605868392\\\\\\\",\\\\\\\"content_journal\\\\\\\":\\\\\\\"Today I created an app\\\\\\\"}\\\",\\\"{\\\\\\\"date\\\\\\\":\\\\\\\"1739260260000\\\\\\\",\\\\\\\"content_journal\\\\\\\":\\\\\\\"I planned for the app\\\\\\\"}\\\"]\",\"category\":\"[]\",\"score\":\"7.8\"}'))
-  ];
+  List<HabitStruct> _userhabit = [];
   List<HabitStruct> get userhabit => _userhabit;
   set userhabit(List<HabitStruct> value) {
     _userhabit = value;
@@ -106,19 +111,6 @@ class FFAppState extends ChangeNotifier {
         'ff_userhabit', _userhabit.map((x) => x.serialize()).toList());
   }
 
-  /// The Data for the AI, to be used through out the app
-  dynamic _AIData = jsonDecode(
-      '{\"description_prompt\":\"In users perspective, write a description for habit telling the benifits, process and challenges, in a summary of 50 words, without title, name of habit is \",\"type_comments\":[\"Feedback\",\"Tips\",\"Motivate\",\"Criticise\",\"Solve\"]}');
-  dynamic get AIData => _AIData;
-  set AIData(dynamic value) {
-    _AIData = value;
-    secureStorage.setString('ff_AIData', jsonEncode(value));
-  }
-
-  void deleteAIData() {
-    secureStorage.delete(key: 'ff_AIData');
-  }
-
   /// See if Dark Mode is on or not
   bool _isDarkMode = false;
   bool get isDarkMode => _isDarkMode;
@@ -129,6 +121,67 @@ class FFAppState extends ChangeNotifier {
 
   void deleteIsDarkMode() {
     secureStorage.delete(key: 'ff_isDarkMode');
+  }
+
+  /// Name of the user when starting the app
+  String _username = 'Saadhaka';
+  String get username => _username;
+  set username(String value) {
+    _username = value;
+    secureStorage.setString('ff_username', value);
+  }
+
+  void deleteUsername() {
+    secureStorage.delete(key: 'ff_username');
+  }
+
+  /// Journals Written
+  List<JournalsStruct> _journalswritten = [
+    JournalsStruct.fromSerializableMap(jsonDecode(
+        '{\"date\":\"1740569425097\",\"content_journal\":\"Hello World\",\"writer\":\"Hello World\",\"secret\":\"false\"}'))
+  ];
+  List<JournalsStruct> get journalswritten => _journalswritten;
+  set journalswritten(List<JournalsStruct> value) {
+    _journalswritten = value;
+    secureStorage.setStringList(
+        'ff_journalswritten', value.map((x) => x.serialize()).toList());
+  }
+
+  void deleteJournalswritten() {
+    secureStorage.delete(key: 'ff_journalswritten');
+  }
+
+  void addToJournalswritten(JournalsStruct value) {
+    journalswritten.add(value);
+    secureStorage.setStringList('ff_journalswritten',
+        _journalswritten.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromJournalswritten(JournalsStruct value) {
+    journalswritten.remove(value);
+    secureStorage.setStringList('ff_journalswritten',
+        _journalswritten.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromJournalswritten(int index) {
+    journalswritten.removeAt(index);
+    secureStorage.setStringList('ff_journalswritten',
+        _journalswritten.map((x) => x.serialize()).toList());
+  }
+
+  void updateJournalswrittenAtIndex(
+    int index,
+    JournalsStruct Function(JournalsStruct) updateFn,
+  ) {
+    journalswritten[index] = updateFn(_journalswritten[index]);
+    secureStorage.setStringList('ff_journalswritten',
+        _journalswritten.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInJournalswritten(int index, JournalsStruct value) {
+    journalswritten.insert(index, value);
+    secureStorage.setStringList('ff_journalswritten',
+        _journalswritten.map((x) => x.serialize()).toList());
   }
 }
 

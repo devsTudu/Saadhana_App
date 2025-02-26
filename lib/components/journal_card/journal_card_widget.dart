@@ -88,7 +88,7 @@ class _JournalCardWidgetState extends State<JournalCardWidget> {
                           widget.writer,
                           style:
                               FlutterFlowTheme.of(context).bodySmall.override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
                         ),
@@ -100,7 +100,7 @@ class _JournalCardWidgetState extends State<JournalCardWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodySmall.override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
                         ),
@@ -132,7 +132,7 @@ class _JournalCardWidgetState extends State<JournalCardWidget> {
                         ),
                         maxLines: 1,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
+                              fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
                       ),

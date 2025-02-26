@@ -11,6 +11,14 @@ enum HabitCategories {
   Intelllectual,
 }
 
+enum AIMood {
+  Tips,
+  Motivate,
+  Solve,
+  Inspire,
+  Criticise,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -24,6 +32,8 @@ T? deserializeEnum<T>(String? value) {
   switch (T) {
     case (HabitCategories):
       return HabitCategories.values.deserialize(value) as T?;
+    case (AIMood):
+      return AIMood.values.deserialize(value) as T?;
     default:
       return null;
   }

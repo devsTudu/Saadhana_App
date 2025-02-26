@@ -77,7 +77,7 @@ class _CommentBlockWidgetState extends State<CommentBlockWidget> {
                       Text(
                         widget.commenter,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
+                              fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
                       ),
@@ -88,7 +88,7 @@ class _CommentBlockWidgetState extends State<CommentBlockWidget> {
                           locale: FFLocalizations.of(context).languageCode,
                         ),
                         style: FlutterFlowTheme.of(context).labelSmall.override(
-                              fontFamily: 'Inter',
+                              fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
                       ),
@@ -204,7 +204,7 @@ class _CommentBlockWidgetState extends State<CommentBlockWidget> {
                 textAlign: TextAlign.start,
                 maxLines: 3,
                 style: FlutterFlowTheme.of(context).labelMedium.override(
-                      fontFamily: 'Inter',
+                      fontFamily: 'Readex Pro',
                       letterSpacing: 0.0,
                     ),
               ),

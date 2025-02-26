@@ -146,12 +146,20 @@ bool _isSupportedLocale(Locale locale) {
 final kTranslationsMap = <Map<String, Map<String, String>>>[
   // HomePage
   {
-    'dvrbf49j': {
-      'en': 'Habit',
+    'flqghbel': {
+      'en': 'Saadhana',
+      'hi': '',
+    },
+    'b82kqhdm': {
+      'en': 'Habits',
       'hi': '',
     },
     'uvyli3xa': {
-      'en': 'Start Good Habits',
+      'en': 'New Habit',
+      'hi': '',
+    },
+    'vdct67z7': {
+      'en': 'Diary',
       'hi': '',
     },
     'bvtrm5v5': {
@@ -404,6 +412,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ', send verification mail',
       'hi': '',
     },
+    'g0okg5uz': {
+      'en': 'Adding new email ?',
+      'hi': '',
+    },
+    'rk81ghgf': {
+      'en': ',update to this one',
+      'hi': '',
+    },
     'bj0qks2a': {
       'en': 'Phone',
       'hi': '',
@@ -413,6 +429,219 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': '',
     },
     '7rnauv10': {
+      'en': 'Home',
+      'hi': '',
+    },
+  },
+  // Balance_Page
+  {
+    '7x1iyxoa': {
+      'en': 'Your Current Balance',
+      'hi': '',
+    },
+    'nm4u7wa9': {
+      'en': 'AI Summarise',
+      'hi': '',
+    },
+    'o6jhnyz3': {
+      'en': 'Audio to Text',
+      'hi': '',
+    },
+    'mxf1wsyc': {
+      'en': 'AI Challenges',
+      'hi': '',
+    },
+    '6klvqsno': {
+      'en': 'Investing in self is the best investment',
+      'hi': '',
+    },
+    'imqex2lp': {
+      'en': 'Recharge',
+      'hi': '',
+    },
+    'wrqa3bdc': {
+      'en': 'Balance',
+      'hi': '',
+    },
+    '36kgrauc': {
+      'en': 'Home',
+      'hi': '',
+    },
+  },
+  // Workin_Zone
+  {
+    'vjm8ldub': {
+      'en': 'Under Construction',
+      'hi': '',
+    },
+    'faqyh1gt': {
+      'en':
+          'We\'re working hard to bring you something amazing. This feature will be available soon!',
+      'hi': '',
+    },
+    'unxmsxnf': {
+      'en': 'Coming Soon',
+      'hi': '',
+    },
+    '26eo33lk': {
+      'en':
+          '• Enhanced user experience\n• New powerful features\n• Improved performance',
+      'hi': '',
+    },
+    'zw5jqytj': {
+      'en': 'Go Back',
+      'hi': '',
+    },
+  },
+  // Start_Page_1
+  {
+    'cyfsg13u': {
+      'en': 'Welcome to ',
+      'hi': '',
+    },
+    '1x8ckx4w': {
+      'en': 'Saadhana',
+      'hi': '',
+    },
+    'jshlzqej': {
+      'en': 'Your way to mastering your life',
+      'hi': '',
+    },
+    'embkddc4': {
+      'en': 'Nick name',
+      'hi': '',
+    },
+    'q02kxnqn': {
+      'en': 'Enter your name',
+      'hi': '',
+    },
+    'qp80z2cg': {
+      'en': 'Get Started',
+      'hi': '',
+    },
+    '1tfmrw1p': {
+      'en': 'By continuing, you agree to our ',
+      'hi': '',
+    },
+    '1i7zfys0': {
+      'en': 'Privacy Policy',
+      'hi': '',
+    },
+    'n6valp4t': {
+      'en': ' and ',
+      'hi': '',
+    },
+    '5n000akp': {
+      'en': 'Terms of Service',
+      'hi': '',
+    },
+    'tut41fbg': {
+      'en': '© 2025 All Rights Reserved.',
+      'hi': '',
+    },
+  },
+  // Start_Page_Add_Habits
+  {
+    'awwzpj94': {
+      'en': 'Create New Habit',
+      'hi': '',
+    },
+    'z47gi764': {
+      'en': 'skip..',
+      'hi': '',
+    },
+    'ti4mmi5g': {
+      'en': 'Choose a habit to track or create your own',
+      'hi': '',
+    },
+    'gisg2hoh': {
+      'en': 'Daily Meditation',
+      'hi': '',
+    },
+    'e5squp7y': {
+      'en': 'Daily breathing for a calm start of the day',
+      'hi': '',
+    },
+    'z6rbk16s': {
+      'en': 'Stay Hydrated',
+      'hi': '',
+    },
+    'yuspioa1': {
+      'en': 'Drink 8 glasses of water daily',
+      'hi': '',
+    },
+    '6edjwr3u': {
+      'en': 'Daily Exercise',
+      'hi': '',
+    },
+    'blzudx4v': {
+      'en': '30 minutes of physical activity',
+      'hi': '',
+    },
+    'n3lz77ip': {
+      'en': 'Reading Time',
+      'hi': '',
+    },
+    'smnl9vfe': {
+      'en': 'Read for 20 minutes daily',
+      'hi': '',
+    },
+    '381x46n0': {
+      'en': 'Create Custom Habit',
+      'hi': '',
+    },
+    'oq12i82o': {
+      'en': 'Habit Name',
+      'hi': '',
+    },
+    '3mxi2qgy': {
+      'en': 'Description (Optional)',
+      'hi': '',
+    },
+    'hibfb4tj': {
+      'en': 'Start Date',
+      'hi': '',
+    },
+    '7z78o4ai': {
+      'en': 'Select Date',
+      'hi': '',
+    },
+    '06j3k1xa': {
+      'en': 'Reminder',
+      'hi': '',
+    },
+    'ewivixbh': {
+      'en': 'Set Time',
+      'hi': '',
+    },
+    '34sz9li7': {
+      'en': 'Create Habit',
+      'hi': '',
+    },
+  },
+  // add_journals
+  {
+    '99o9tts0': {
+      'en': '',
+      'hi': '',
+    },
+    'sphlwen8': {
+      'en': 'Journal here',
+      'hi': '',
+    },
+    '4qznep1w': {
+      'en': 'Title',
+      'hi': '',
+    },
+    'fqbnzjj3': {
+      'en': 'Save',
+      'hi': '',
+    },
+    'r94ytzcj': {
+      'en': 'Write Journal',
+      'hi': '',
+    },
+    'e5dmny9t': {
       'en': 'Home',
       'hi': '',
     },
@@ -447,27 +676,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': '',
     },
     'v3ccgvjx': {
-      'en': 'Motivation',
+      'en': '',
       'hi': '',
     },
     'i5f2jmpj': {
       'en': 'Type',
-      'hi': '',
-    },
-    '383azmht': {
-      'en': 'Tips',
-      'hi': '',
-    },
-    'itd7sc83': {
-      'en': 'Motivate',
-      'hi': '',
-    },
-    'jas7pw68': {
-      'en': 'Critcise',
-      'hi': '',
-    },
-    'bpiynf0g': {
-      'en': 'Solve',
       'hi': '',
     },
     'gzy6xavs': {

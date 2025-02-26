@@ -76,7 +76,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
             '6ioe2w4y' /* Complete Profile */,
           ),
           style: FlutterFlowTheme.of(context).titleSmall.override(
-                fontFamily: 'Inter',
+                fontFamily: 'Readex Pro',
                 letterSpacing: 0.0,
               ),
         ),
@@ -107,32 +107,19 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: AuthUserStreamWidget(
-                  builder: (context) => InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      logFirebaseEvent(
-                          'PROFILE_EDIT_CircleImage_i0cfe5j8_ON_TAP');
-                      logFirebaseEvent('CircleImage_navigate_to');
-
-                      context.pushNamed(ProfileEditWidget.routeName);
-                    },
-                    child: Container(
-                      width: 200.0,
-                      height: 200.0,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
+                  builder: (context) => Container(
+                    width: 200.0,
+                    height: 200.0,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.network(
+                      valueOrDefault<String>(
+                        currentUserPhoto,
+                        'https://images.unsplash.com/photo-1616435577207-ca90abc6b732?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxsb3R1c3xlbnwwfHx8fDE3NDAxMjA2MzV8MA&ixlib=rb-4.0.3&q=80&w=1080',
                       ),
-                      child: Image.network(
-                        valueOrDefault<String>(
-                          currentUserPhoto,
-                          'https://images.unsplash.com/photo-1616435577207-ca90abc6b732?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxsb3R1c3xlbnwwfHx8fDE3NDAxMjA2MzV8MA&ixlib=rb-4.0.3&q=80&w=1080',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -148,7 +135,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                       ),
                       style:
                           FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: 'Open Sans',
+                                fontFamily: 'Inter',
                                 letterSpacing: 0.0,
                               ),
                     ),
@@ -172,7 +159,6 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                               builder: (context) => TextFormField(
                                 controller: _model.nameTextController,
                                 focusNode: _model.nameFocusNode,
-                                readOnly: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText:
@@ -182,13 +168,13 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Readex Pro',
                                         letterSpacing: 0.0,
                                       ),
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Readex Pro',
                                         letterSpacing: 0.0,
                                       ),
                                   enabledBorder: OutlineInputBorder(
@@ -228,7 +214,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
                                 validator: _model.nameTextControllerValidator
@@ -257,7 +243,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
                                 hintText: FFLocalizations.of(context).getText(
@@ -266,7 +252,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
                                 enabledBorder: OutlineInputBorder(
@@ -305,10 +291,12 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
-                                    color: Color(0xFFDBE2E7),
+                                    fontFamily: 'Readex Pro',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     letterSpacing: 0.0,
                                   ),
+                              keyboardType: TextInputType.emailAddress,
                               validator: _model.emailTextControllerValidator
                                   .asValidator(context),
                             ),
@@ -328,7 +316,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -350,13 +338,68 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Readex Pro',
                                       letterSpacing: 0.0,
                                     ),
                               ),
                             ),
                           ],
                         ),
+                      ),
+                    if (currentUserEmail != currentUserEmail)
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'g0okg5uz' /* Adding new email ? */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'PROFILE_EDIT_PAGE_Text_b5gwe1rv_ON_TAP');
+                              logFirebaseEvent('Text_auth');
+                              if (_model.emailTextController.text.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Email required!',
+                                    ),
+                                  ),
+                                );
+                                return;
+                              }
+
+                              await authManager.updateEmail(
+                                email: _model.emailTextController.text,
+                                context: context,
+                              );
+                              safeSetState(() {});
+                            },
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'rk81ghgf' /* ,update to this one */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                          ),
+                        ],
                       ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -378,13 +421,13 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Readex Pro',
                                         letterSpacing: 0.0,
                                       ),
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Readex Pro',
                                         letterSpacing: 0.0,
                                       ),
                                   enabledBorder: OutlineInputBorder(
@@ -424,10 +467,12 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
-                                      color: Color(0xFFDBE2E7),
+                                      fontFamily: 'Readex Pro',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       letterSpacing: 0.0,
                                     ),
+                                keyboardType: TextInputType.phone,
                                 validator: _model
                                     .phoneNumberTextControllerValidator
                                     .asValidator(context),
@@ -480,7 +525,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Inter',
+                        fontFamily: 'Readex Pro',
                         color: Colors.white,
                         letterSpacing: 0.0,
                       ),

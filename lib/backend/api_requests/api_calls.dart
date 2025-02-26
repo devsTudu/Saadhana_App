@@ -9,6 +9,65 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
+/// Start OpenAI ChatGPT Group Code
+
+class OpenAIChatGPTGroup {
+  static String getBaseUrl() => 'https://api.openai.com/v1';
+  static Map<String, String> headers = {
+    'Content-Type': 'application/json',
+  };
+  static SendFullPromptCall sendFullPromptCall = SendFullPromptCall();
+}
+
+class SendFullPromptCall {
+  Future<ApiCallResponse> call({
+    String? apiKey = '',
+    dynamic promptJson,
+  }) async {
+    final baseUrl = OpenAIChatGPTGroup.getBaseUrl();
+
+    final prompt = _serializeJson(promptJson);
+    final ffApiRequestBody = '''
+{
+  "model": "gpt-4",
+  "messages": ${prompt}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Send Full Prompt',
+      apiUrl: '${baseUrl}/chat/completions',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${apiKey}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? createdTimestamp(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.created''',
+      ));
+  String? role(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.choices[:].message.role''',
+      ));
+  String? content(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.choices[:].message.content''',
+      ));
+}
+
+/// End OpenAI ChatGPT Group Code
+
 class GeminiCall {
   static Future<ApiCallResponse> call({
     String? query = '',

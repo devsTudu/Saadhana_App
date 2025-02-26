@@ -31,7 +31,7 @@ void main() async {
   if (!kIsWeb) {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   }
-
+  await initializeFirebaseRemoteConfig();
   await initializeFirebaseAppCheck();
 
   runApp(ChangeNotifierProvider(
@@ -110,6 +110,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Saadhana',
       localizationsDelegates: [
         FFLocalizationsDelegate(),

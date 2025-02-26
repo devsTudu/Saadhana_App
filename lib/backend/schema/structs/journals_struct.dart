@@ -12,11 +12,13 @@ class JournalsStruct extends FFFirebaseStruct {
     String? contentJournal,
     String? writer,
     bool? secret,
+    String? title,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _date = date,
         _contentJournal = contentJournal,
         _writer = writer,
         _secret = secret,
+        _title = title,
         super(firestoreUtilData);
 
   // "date" field.
@@ -47,11 +49,19 @@ class JournalsStruct extends FFFirebaseStruct {
 
   bool hasSecret() => _secret != null;
 
+  // "title" field.
+  String? _title;
+  String get title => _title ?? 'Journal';
+  set title(String? val) => _title = val;
+
+  bool hasTitle() => _title != null;
+
   static JournalsStruct fromMap(Map<String, dynamic> data) => JournalsStruct(
         date: data['date'] as DateTime?,
         contentJournal: data['content_journal'] as String?,
         writer: data['writer'] as String?,
         secret: data['secret'] as bool?,
+        title: data['title'] as String?,
       );
 
   static JournalsStruct? maybeFromMap(dynamic data) =>
@@ -62,6 +72,7 @@ class JournalsStruct extends FFFirebaseStruct {
         'content_journal': _contentJournal,
         'writer': _writer,
         'secret': _secret,
+        'title': _title,
       }.withoutNulls;
 
   @override
@@ -81,6 +92,10 @@ class JournalsStruct extends FFFirebaseStruct {
         'secret': serializeParam(
           _secret,
           ParamType.bool,
+        ),
+        'title': serializeParam(
+          _title,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -106,6 +121,11 @@ class JournalsStruct extends FFFirebaseStruct {
           ParamType.bool,
           false,
         ),
+        title: deserializeParam(
+          data['title'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -117,12 +137,13 @@ class JournalsStruct extends FFFirebaseStruct {
         date == other.date &&
         contentJournal == other.contentJournal &&
         writer == other.writer &&
-        secret == other.secret;
+        secret == other.secret &&
+        title == other.title;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([date, contentJournal, writer, secret]);
+      const ListEquality().hash([date, contentJournal, writer, secret, title]);
 }
 
 JournalsStruct createJournalsStruct({
@@ -130,6 +151,7 @@ JournalsStruct createJournalsStruct({
   String? contentJournal,
   String? writer,
   bool? secret,
+  String? title,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -140,6 +162,7 @@ JournalsStruct createJournalsStruct({
       contentJournal: contentJournal,
       writer: writer,
       secret: secret,
+      title: title,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

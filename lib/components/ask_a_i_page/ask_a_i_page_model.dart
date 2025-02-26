@@ -12,6 +12,9 @@ class AskAIPageModel extends FlutterFlowModel<AskAIPageWidget> {
   /// Query to AI
   String query = 'How to improve in practicing habits, suggest in 50 words';
 
+  /// Mood of AI
+  String? mood = 'Motivation';
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for DropDown widget.

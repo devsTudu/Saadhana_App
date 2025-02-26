@@ -187,7 +187,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                       style: FlutterFlowTheme.of(context)
                                           .headlineMedium
                                           .override(
-                                            fontFamily: 'Open Sans',
+                                            fontFamily: 'Inter',
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w900,
                                           ),
@@ -227,14 +227,14 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .displaySmall
                                         .override(
-                                          fontFamily: 'Open Sans',
+                                          fontFamily: 'Inter',
                                           letterSpacing: 0.0,
                                         ),
                                     unselectedLabelStyle:
                                         FlutterFlowTheme.of(context)
                                             .displaySmall
                                             .override(
-                                              fontFamily: 'Open Sans',
+                                              fontFamily: 'Inter',
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -292,7 +292,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                           context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily:
+                                                            'Readex Pro',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -326,7 +327,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                               .labelMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Readex Pro',
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
@@ -389,7 +390,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily:
+                                                              'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
                                                     keyboardType: TextInputType
@@ -434,7 +436,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                               .labelMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Readex Pro',
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
@@ -520,7 +522,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily:
+                                                              'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
                                                     cursorColor:
@@ -601,7 +604,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                               .titleSmall
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Readex Pro',
                                                                 color: Colors
                                                                     .white,
                                                                 letterSpacing:
@@ -687,7 +690,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                               .bodyMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Readex Pro',
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
@@ -734,7 +737,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                                 .labelMedium
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Inter',
+                                                                      'Readex Pro',
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -841,7 +844,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                                     .bodyMedium
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Inter',
+                                                                          'Readex Pro',
                                                                       letterSpacing:
                                                                           0.0,
                                                                       fontWeight:
@@ -902,7 +905,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                           context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily:
+                                                            'Readex Pro',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -936,7 +940,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                               .labelMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Readex Pro',
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
@@ -999,7 +1003,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily:
+                                                              'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
                                                     keyboardType: TextInputType
@@ -1043,7 +1048,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                               .labelMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Readex Pro',
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
@@ -1106,7 +1111,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily:
+                                                              'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
                                                     keyboardType:
@@ -1154,7 +1160,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                               .labelMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Readex Pro',
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
@@ -1240,7 +1246,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily:
+                                                              'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
                                                     cursorColor:
@@ -1283,7 +1290,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                               .labelMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Readex Pro',
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
@@ -1369,7 +1376,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily:
+                                                              'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
                                                     minLines: 1,
@@ -1478,7 +1486,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                               .titleSmall
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Readex Pro',
                                                                 color: Colors
                                                                     .white,
                                                                 letterSpacing:
@@ -1526,7 +1534,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                                 .labelMedium
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Inter',
+                                                                      'Readex Pro',
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -1641,7 +1649,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                                     .bodyMedium
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Inter',
+                                                                          'Readex Pro',
                                                                       letterSpacing:
                                                                           0.0,
                                                                       fontWeight:
