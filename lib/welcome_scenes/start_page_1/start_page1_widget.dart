@@ -1,10 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'start_page1_model.dart';
 export 'start_page1_model.dart';
 
@@ -19,10 +21,13 @@ class StartPage1Widget extends StatefulWidget {
   State<StartPage1Widget> createState() => _StartPage1WidgetState();
 }
 
-class _StartPage1WidgetState extends State<StartPage1Widget> {
+class _StartPage1WidgetState extends State<StartPage1Widget>
+    with TickerProviderStateMixin {
   late StartPage1Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -33,6 +38,22 @@ class _StartPage1WidgetState extends State<StartPage1Widget> {
         parameters: {'screen_name': 'Start_Page_1'});
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'dividerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          ScaleEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1050.0.ms,
+            begin: Offset(-4.0, 1.0),
+            end: Offset(1.0, 1.0),
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -100,7 +121,7 @@ class _StartPage1WidgetState extends State<StartPage1Widget> {
                                           .override(
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                                .secondary,
                                             letterSpacing: 0.0,
                                           ),
                                     )
@@ -142,27 +163,19 @@ class _StartPage1WidgetState extends State<StartPage1Widget> {
                               ),
                             ].divide(SizedBox(height: 8.0)),
                           ),
-                          Container(
-                            width: double.infinity,
-                            height: 4.0,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  FlutterFlowTheme.of(context).primary,
-                                  Color(0x33000000)
-                                ],
-                                stops: [0.0, 1.0],
-                                begin: AlignmentDirectional(0.0, -1.0),
-                                end: AlignmentDirectional(0, 1.0),
-                              ),
-                            ),
-                          ),
                         ].divide(SizedBox(height: 16.0)),
                       ),
                     ),
                   ),
                 ),
               ),
+              SizedBox(
+                width: 250.0,
+                child: Divider(
+                  thickness: 2.0,
+                  color: FlutterFlowTheme.of(context).primary,
+                ),
+              ).animateOnPageLoad(animationsMap['dividerOnPageLoadAnimation']!),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: Container(
@@ -228,8 +241,8 @@ class _StartPage1WidgetState extends State<StartPage1Widget> {
                                 .secondaryBackground,
                             contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 20.0, 16.0, 20.0),
-                            suffixIcon: Icon(
-                              Icons.check_circle_rounded,
+                            prefixIcon: Icon(
+                              Icons.person_rounded,
                             ),
                           ),
                           style:
@@ -301,7 +314,7 @@ class _StartPage1WidgetState extends State<StartPage1Widget> {
                           logFirebaseEvent('Button_navigate_to');
 
                           context.goNamedAuth(
-                            StartPageAddHabitsWidget.routeName,
+                            HomePageWidget.routeName,
                             context.mounted,
                             extra: <String, dynamic>{
                               kTransitionInfoKey: TransitionInfo(
@@ -341,12 +354,29 @@ class _StartPage1WidgetState extends State<StartPage1Widget> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
+              FFButtonWidget(
+                onPressed: () async {
+                  logFirebaseEvent('START_PAGE_1_PAGE_SKIP_BTN_ON_TAP');
+                  logFirebaseEvent('Button_navigate_to');
+
+                  context.pushNamed(HomePageWidget.routeName);
+                },
+                text: FFLocalizations.of(context).getText(
+                  'qqmoxu65' /* skip */,
+                ),
+                options: FFButtonOptions(
+                  height: 40.0,
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  iconPadding:
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: FlutterFlowTheme.of(context).accent4,
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily: 'Readex Pro',
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        letterSpacing: 0.0,
+                      ),
+                  elevation: 0.0,
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
               Padding(

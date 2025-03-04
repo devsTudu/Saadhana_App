@@ -761,6 +761,7 @@ class _CreateHabitWidgetState extends State<CreateHabitWidget> {
                           score: 5.0,
                           hasDue: _model.switchValue,
                           createDate: getCurrentTimestamp,
+                          goals: _model.choiceChipsValues,
                         ));
                         safeSetState(() {});
                         logFirebaseEvent('submit_btn_reset_form_fields');

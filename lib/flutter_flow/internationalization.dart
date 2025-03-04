@@ -162,6 +162,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Diary',
       'hi': '',
     },
+    'yj1jsi45': {
+      'en': 'General',
+      'hi': '',
+    },
+    '493xzxkc': {
+      'en': 'Habit',
+      'hi': '',
+    },
+    'xo71txim': {
+      'en': 'General',
+      'hi': '',
+    },
     'bvtrm5v5': {
       'en': 'Home',
       'hi': '',
@@ -224,24 +236,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // habit_view
   {
-    '00fseq0w': {
-      'en': 'Today',
-      'hi': '',
-    },
-    'to2zb9ob': {
-      'en': '/',
-      'hi': '',
-    },
     'skcugqzw': {
       'en': ' Overall',
       'hi': '',
     },
-    'mbkn9ltj': {
-      'en': 'Comments',
+    'wazbgm6r': {
+      'en': ' Today',
       'hi': '',
     },
-    'ztln9x0f': {
-      'en': 'Habit Details',
+    'yy1wk8k0': {
+      'en': 'Ask AI',
+      'hi': '',
+    },
+    'mbkn9ltj': {
+      'en': 'Comments',
       'hi': '',
     },
     'i33tz64o': {
@@ -328,10 +336,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': '',
     },
   },
-  // profile
+  // menu
   {
     'xnx7bpfa': {
       'en': 'Log out',
+      'hi': '',
+    },
+    '7u0rgkj7': {
+      'en': 'Sign In',
       'hi': '',
     },
     'juwnzev4': {
@@ -343,7 +355,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': '',
     },
     'glseehyx': {
-      'en': 'Notification Settings',
+      'en': 'Settings Habit',
       'hi': '',
     },
     'q2c0lr74': {
@@ -367,7 +379,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': '',
     },
     'tx2vkj0m': {
-      'en': 'Profile',
+      'en': 'Setting',
       'hi': '',
     },
     'tygrew6y': {
@@ -377,6 +389,26 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // comment_read
   {
+    'ta9tgzo3': {
+      'en': 'Added on',
+      'hi': '',
+    },
+    'glj1v1xd': {
+      'en': 'Writen By',
+      'hi': '',
+    },
+    'lmy7m1es': {
+      'en': 'Hidden from AI',
+      'hi': '',
+    },
+    '8gm0fchn': {
+      'en': 'Yes 🔒',
+      'hi': '',
+    },
+    'd5mc7edu': {
+      'en': 'No 🔓',
+      'hi': '',
+    },
     'xfs1iyf5': {
       'en': 'Home',
       'hi': '',
@@ -426,6 +458,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qdvmqape': {
       'en': 'Save Changes',
+      'hi': '',
+    },
+    'vtlyqi6o': {
+      'en': 'Sign In',
       'hi': '',
     },
     '7rnauv10': {
@@ -519,6 +555,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Get Started',
       'hi': '',
     },
+    'qqmoxu65': {
+      'en': 'skip',
+      'hi': '',
+    },
     '1tfmrw1p': {
       'en': 'By continuing, you agree to our ',
       'hi': '',
@@ -537,85 +577,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'tut41fbg': {
       'en': '© 2025 All Rights Reserved.',
-      'hi': '',
-    },
-  },
-  // Start_Page_Add_Habits
-  {
-    'awwzpj94': {
-      'en': 'Create New Habit',
-      'hi': '',
-    },
-    'z47gi764': {
-      'en': 'skip..',
-      'hi': '',
-    },
-    'ti4mmi5g': {
-      'en': 'Choose a habit to track or create your own',
-      'hi': '',
-    },
-    'gisg2hoh': {
-      'en': 'Daily Meditation',
-      'hi': '',
-    },
-    'e5squp7y': {
-      'en': 'Daily breathing for a calm start of the day',
-      'hi': '',
-    },
-    'z6rbk16s': {
-      'en': 'Stay Hydrated',
-      'hi': '',
-    },
-    'yuspioa1': {
-      'en': 'Drink 8 glasses of water daily',
-      'hi': '',
-    },
-    '6edjwr3u': {
-      'en': 'Daily Exercise',
-      'hi': '',
-    },
-    'blzudx4v': {
-      'en': '30 minutes of physical activity',
-      'hi': '',
-    },
-    'n3lz77ip': {
-      'en': 'Reading Time',
-      'hi': '',
-    },
-    'smnl9vfe': {
-      'en': 'Read for 20 minutes daily',
-      'hi': '',
-    },
-    '381x46n0': {
-      'en': 'Create Custom Habit',
-      'hi': '',
-    },
-    'oq12i82o': {
-      'en': 'Habit Name',
-      'hi': '',
-    },
-    '3mxi2qgy': {
-      'en': 'Description (Optional)',
-      'hi': '',
-    },
-    'hibfb4tj': {
-      'en': 'Start Date',
-      'hi': '',
-    },
-    '7z78o4ai': {
-      'en': 'Select Date',
-      'hi': '',
-    },
-    '06j3k1xa': {
-      'en': 'Reminder',
-      'hi': '',
-    },
-    'ewivixbh': {
-      'en': 'Set Time',
-      'hi': '',
-    },
-    '34sz9li7': {
-      'en': 'Create Habit',
       'hi': '',
     },
   },
@@ -646,6 +607,134 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': '',
     },
   },
+  // habit_setting_page
+  {
+    'urulco71': {
+      'en': 'Habit Setting',
+      'hi': '',
+    },
+    '9erj2goo': {
+      'en': 'Goals',
+      'hi': '',
+    },
+    'u7ihdiwd': {
+      'en': 'Option 1',
+      'hi': '',
+    },
+    'tz3i15jc': {
+      'en': 'Option 2',
+      'hi': '',
+    },
+    '03cn1snw': {
+      'en': 'Option 3',
+      'hi': '',
+    },
+    'sijqhmnv': {
+      'en': 'New Goal',
+      'hi': '',
+    },
+    'caoxpvc1': {
+      'en': 'Notifications',
+      'hi': '',
+    },
+    'l1aovyi0': {
+      'en': 'Home',
+      'hi': '',
+    },
+  },
+  // support_page
+  {
+    'eb67zt6b': {
+      'en': 'Welcome to support',
+      'hi': '',
+    },
+    '6yl3ehbr': {
+      'en': 'How can we help you?',
+      'hi': '',
+    },
+    '9ofk8hd7': {
+      'en': 'Walkthrough',
+      'hi': '',
+    },
+    'jkdqjljl': {
+      'en': 'Call Us',
+      'hi': '',
+    },
+    '7kcpoi9r': {
+      'en': 'Email Us',
+      'hi': '',
+    },
+    'g03vbnqn': {
+      'en': 'Review FAQ\'s below',
+      'hi': '',
+    },
+    'eym2cwgj': {
+      'en': 'Chat Now',
+      'hi': '',
+    },
+    'kzxchda6': {
+      'en': 'Get support',
+      'hi': '',
+    },
+    'wsyfqxnl': {
+      'en': 'Home',
+      'hi': '',
+    },
+  },
+  // walkthroughs
+  {
+    '0a115lxp': {
+      'en': 'Learn how to make the most of your experience',
+      'hi': '',
+    },
+    's3p16asz': {
+      'en': 'Track Your Habits',
+      'hi': '',
+    },
+    '4ys1ql8j': {
+      'en':
+          'Learn how to create and monitor your daily habits for better consistency',
+      'hi': '',
+    },
+    '87taz450': {
+      'en': 'View Guide',
+      'hi': '',
+    },
+    'iolk0gsp': {
+      'en': 'AI Features',
+      'hi': '',
+    },
+    '2dwgry7x': {
+      'en':
+          'Discover how AI can help you build better habits with personalized suggestions',
+      'hi': '',
+    },
+    '56vv2dxt': {
+      'en': 'View Guide',
+      'hi': '',
+    },
+    'yztyfchu': {
+      'en': 'Journaling',
+      'hi': '',
+    },
+    'bijhqvwq': {
+      'en':
+          'Learn to write your achievements and challenges to look back when required',
+      'hi': '',
+    },
+    'gugyzari': {
+      'en': 'View Guide',
+      'hi': '',
+    },
+    'vqolqpmn': {
+      'en': 'More walkthroughs will be added soon',
+      'hi': '',
+    },
+    '0gp9mtpa': {
+      'en': 'App Guide',
+      'hi': '',
+    },
+  },
   // JournalPage
   {
     '56hyss0l': {
@@ -654,6 +743,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'mvxuw35n': {
       'en': 'Comment',
+      'hi': '',
+    },
+    '9p6561p8': {
+      'en': 'AI will read this to help you',
+      'hi': '',
+    },
+    'k8fgepv5': {
+      'en': 'AI will not read this',
+      'hi': '',
+    },
+    'tf8rpyld': {
+      'en': 'It will never be shared outside',
       'hi': '',
     },
     '6bg6h3g0': {
@@ -676,7 +777,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': '',
     },
     'v3ccgvjx': {
-      'en': '',
+      'en': 'Motivate',
       'hi': '',
     },
     'i5f2jmpj': {
@@ -704,6 +805,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'fkzl20dm': {
       'en': 'Dark Mode',
+      'hi': '',
+    },
+  },
+  // walker
+  {
+    '588e6803': {
+      'en': 'Guide',
       'hi': '',
     },
   },

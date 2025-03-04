@@ -1,4 +1,3 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
@@ -58,7 +57,7 @@ class _CommentBlockWidgetState extends State<CommentBlockWidget> {
 
     return Container(
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).primaryBackground,
+        color: FlutterFlowTheme.of(context).secondaryBackground,
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
@@ -147,22 +146,6 @@ class _CommentBlockWidgetState extends State<CommentBlockWidget> {
                     ),
                   ),
                 ),
-                FlutterFlowIconButton(
-                  borderColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  borderRadius: 20.0,
-                  borderWidth: 1.0,
-                  buttonSize: 36.0,
-                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  hoverColor: FlutterFlowTheme.of(context).primaryBackground,
-                  icon: Icon(
-                    Icons.keyboard_control,
-                    color: FlutterFlowTheme.of(context).secondaryText,
-                    size: 20.0,
-                  ),
-                  onPressed: () {
-                    print('IconButton pressed ...');
-                  },
-                ),
               ].divide(SizedBox(width: 12.0)),
             ),
             InkWell(
@@ -196,7 +179,7 @@ class _CommentBlockWidgetState extends State<CommentBlockWidget> {
                           ?.journal
                           .elementAtOrNull(widget.idxJournal!))
                       ?.contentJournal,
-                  'Habit Details',
+                  'Journals Content goes here',
                 ).maybeHandleOverflow(
                   maxChars: 80,
                   replacement: '…',

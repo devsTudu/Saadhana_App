@@ -93,104 +93,101 @@ class _HabitCardWidgetState extends State<HabitCardWidget> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                width: 100.0,
-                                height: 100.0,
-                                constraints: BoxConstraints(
-                                  maxWidth: 40.0,
-                                  maxHeight: 40.0,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              width: 100.0,
+                              height: 100.0,
+                              constraints: BoxConstraints(
+                                maxWidth: 40.0,
+                                maxHeight: 40.0,
+                              ),
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).secondary,
+                                borderRadius: BorderRadius.circular(6.0),
+                              ),
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  FFAppState()
+                                      .userhabit
+                                      .elementAtOrNull(widget.index!)
+                                      ?.title,
+                                  'H',
+                                ).maybeHandleOverflow(
+                                  maxChars: 1,
                                 ),
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).secondary,
-                                  borderRadius: BorderRadius.circular(6.0),
-                                ),
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    FFAppState()
-                                        .userhabit
-                                        .elementAtOrNull(widget.index!)
-                                        ?.title,
-                                    'H',
-                                  ).maybeHandleOverflow(
-                                    maxChars: 1,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: FlutterFlowTheme.of(context)
-                                            .accent4,
-                                        letterSpacing: 0.0,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color:
+                                          FlutterFlowTheme.of(context).accent4,
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ),
+                            Flexible(
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 0.0, 0.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 0.0),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          FFAppState()
+                                              .userhabit
+                                              .elementAtOrNull(widget.index!)
+                                              ?.title,
+                                          'Habit Name',
+                                        ).maybeHandleOverflow(
+                                          maxChars: 25,
+                                          replacement: '…',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
+                                    ),
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 0.0),
+                                      child: AutoSizeText(
+                                        valueOrDefault<String>(
+                                          FFAppState()
+                                              .userhabit
+                                              .elementAtOrNull(widget.index!)
+                                              ?.journal
+                                              .lastOrNull
+                                              ?.contentJournal,
+                                          'Last Comment',
+                                        ).maybeHandleOverflow(
+                                          maxChars: 30,
+                                          replacement: '…',
+                                        ),
+                                        textAlign: TextAlign.start,
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Flexible(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 0.0, 0.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(-1.0, 0.0),
-                                        child: Text(
-                                          valueOrDefault<String>(
-                                            FFAppState()
-                                                .userhabit
-                                                .elementAtOrNull(widget.index!)
-                                                ?.title,
-                                            'Habit Name',
-                                          ).maybeHandleOverflow(
-                                            maxChars: 23,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(-1.0, 0.0),
-                                        child: AutoSizeText(
-                                          valueOrDefault<String>(
-                                            FFAppState()
-                                                .userhabit
-                                                .elementAtOrNull(widget.index!)
-                                                ?.journal
-                                                .lastOrNull
-                                                ?.contentJournal,
-                                            'Last Comment',
-                                          ).maybeHandleOverflow(
-                                            maxChars: 35,
-                                            replacement: '…',
-                                          ),
-                                          textAlign: TextAlign.start,
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       Row(
@@ -221,7 +218,7 @@ class _HabitCardWidgetState extends State<HabitCardWidget> {
                           ),
                           Icon(
                             Icons.star_rounded,
-                            color: FlutterFlowTheme.of(context).primaryText,
+                            color: FlutterFlowTheme.of(context).tertiary,
                             size: 20.0,
                           ),
                         ],

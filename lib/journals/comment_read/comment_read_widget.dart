@@ -56,7 +56,7 @@ class _CommentReadWidgetState extends State<CommentReadWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
@@ -99,6 +99,154 @@ class _CommentReadWidgetState extends State<CommentReadWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    elevation: 0.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'ta9tgzo3' /* Added on */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).labelSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                        Text(
+                          valueOrDefault<String>(
+                            dateTimeFormat(
+                              "MMMEd",
+                              (FFAppState()
+                                      .userhabit
+                                      .elementAtOrNull(widget.indexHabit!)
+                                      ?.journal
+                                      .elementAtOrNull(widget.indexJournal!))
+                                  ?.date,
+                              locale: FFLocalizations.of(context).languageCode,
+                            ),
+                            'Mar 31, 2025',
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    elevation: 0.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'glj1v1xd' /* Writen By */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).labelSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                        Text(
+                          valueOrDefault<String>(
+                            (FFAppState()
+                                    .userhabit
+                                    .elementAtOrNull(widget.indexHabit!)
+                                    ?.journal
+                                    .elementAtOrNull(widget.indexJournal!))
+                                ?.writer,
+                            'Writer Name',
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    elevation: 0.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'lmy7m1es' /* Hidden from AI */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).labelSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                        Builder(
+                          builder: (context) {
+                            if (valueOrDefault<bool>(
+                              (FFAppState()
+                                      .userhabit
+                                      .elementAtOrNull(widget.indexHabit!)
+                                      ?.journal
+                                      .elementAtOrNull(widget.indexJournal!))
+                                  ?.secret,
+                              true,
+                            )) {
+                              return Text(
+                                FFLocalizations.of(context).getText(
+                                  '8gm0fchn' /* Yes 🔒 */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                              );
+                            } else {
+                              return Text(
+                                FFLocalizations.of(context).getText(
+                                  'd5mc7edu' /* No 🔓 */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               Expanded(
                 child: Padding(
                   padding:

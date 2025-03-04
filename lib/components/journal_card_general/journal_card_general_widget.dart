@@ -1,17 +1,19 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'journal_card_model.dart';
-export 'journal_card_model.dart';
+import 'journal_card_general_model.dart';
+export 'journal_card_general_model.dart';
 
-class JournalCardWidget extends StatefulWidget {
-  const JournalCardWidget({
+class JournalCardGeneralWidget extends StatefulWidget {
+  const JournalCardGeneralWidget({
     super.key,
     required this.dateJournal,
     String? content,
     String? writer,
+    Color? color,
   })  : this.content = content ?? 'That day I did this habit',
-        this.writer = writer ?? 'User';
+        this.writer = writer ?? 'User',
+        this.color = color ?? Colors.white;
 
   /// Date when the journal was writen
   final DateTime? dateJournal;
@@ -22,12 +24,16 @@ class JournalCardWidget extends StatefulWidget {
   /// the one who wrote
   final String writer;
 
+  /// Color of Journal
+  final Color color;
+
   @override
-  State<JournalCardWidget> createState() => _JournalCardWidgetState();
+  State<JournalCardGeneralWidget> createState() =>
+      _JournalCardGeneralWidgetState();
 }
 
-class _JournalCardWidgetState extends State<JournalCardWidget> {
-  late JournalCardModel _model;
+class _JournalCardGeneralWidgetState extends State<JournalCardGeneralWidget> {
+  late JournalCardGeneralModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -38,7 +44,7 @@ class _JournalCardWidgetState extends State<JournalCardWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => JournalCardModel());
+    _model = createModel(context, () => JournalCardGeneralModel());
   }
 
   @override
@@ -52,8 +58,8 @@ class _JournalCardWidgetState extends State<JournalCardWidget> {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: FlutterFlowTheme.of(context).secondaryBackground,
-      elevation: 0.0,
+      color: widget.color,
+      elevation: 1.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -62,19 +68,9 @@ class _JournalCardWidgetState extends State<JournalCardWidget> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
-              height: 70.0,
-              child: VerticalDivider(
-                width: 24.0,
-                thickness: 4.0,
-                indent: 12.0,
-                endIndent: 12.0,
-                color: FlutterFlowTheme.of(context).primary,
-              ),
-            ),
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 5.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -84,22 +80,35 @@ class _JournalCardWidgetState extends State<JournalCardWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          widget.writer,
-                          style:
-                              FlutterFlowTheme.of(context).bodySmall.override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0.0,
-                                  ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  widget.writer,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         Text(
                           dateTimeFormat(
                             "relative",
                             widget.dateJournal,
-                            locale: FFLocalizations.of(context).languageCode,
+                            locale:
+                                FFLocalizations.of(context).languageShortCode ??
+                                    FFLocalizations.of(context).languageCode,
                           ),
                           style:
-                              FlutterFlowTheme.of(context).bodySmall.override(
+                              FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
@@ -131,7 +140,7 @@ class _JournalCardWidgetState extends State<JournalCardWidget> {
                           replacement: '…',
                         ),
                         maxLines: 1,
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        style: FlutterFlowTheme.of(context).bodySmall.override(
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),

@@ -11,6 +11,8 @@ Future initializeFirebaseRemoteConfig() async {
       'ai_summarise_price': 2,
       'ai_challenge_price': 10,
       'ai_audio_note_price': 5,
+      'support_phone': '+919348692623',
+      'starting_bonus': 30,
     });
     await FirebaseRemoteConfig.instance.fetchAndActivate();
   } catch (error) {

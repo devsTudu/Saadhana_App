@@ -18,6 +18,7 @@ class HabitStruct extends FFFirebaseStruct {
     double? score,
     bool? hasDue,
     DateTime? createDate,
+    List<String>? goals,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _title = title,
         _description = description,
@@ -28,6 +29,7 @@ class HabitStruct extends FFFirebaseStruct {
         _score = score,
         _hasDue = hasDue,
         _createDate = createDate,
+        _goals = goals,
         super(firestoreUtilData);
 
   // "Title" field.
@@ -107,6 +109,17 @@ class HabitStruct extends FFFirebaseStruct {
 
   bool hasCreateDate() => _createDate != null;
 
+  // "goals" field.
+  List<String>? _goals;
+  List<String> get goals => _goals ?? const [];
+  set goals(List<String>? val) => _goals = val;
+
+  void updateGoals(Function(List<String>) updateFn) {
+    updateFn(_goals ??= []);
+  }
+
+  bool hasGoals() => _goals != null;
+
   static HabitStruct fromMap(Map<String, dynamic> data) => HabitStruct(
         title: data['Title'] as String?,
         description: data['description'] as String?,
@@ -120,6 +133,7 @@ class HabitStruct extends FFFirebaseStruct {
         score: castToType<double>(data['score']),
         hasDue: data['hasDue'] as bool?,
         createDate: data['createDate'] as DateTime?,
+        goals: getDataList(data['goals']),
       );
 
   static HabitStruct? maybeFromMap(dynamic data) =>
@@ -135,6 +149,7 @@ class HabitStruct extends FFFirebaseStruct {
         'score': _score,
         'hasDue': _hasDue,
         'createDate': _createDate,
+        'goals': _goals,
       }.withoutNulls;
 
   @override
@@ -177,6 +192,11 @@ class HabitStruct extends FFFirebaseStruct {
         'createDate': serializeParam(
           _createDate,
           ParamType.DateTime,
+        ),
+        'goals': serializeParam(
+          _goals,
+          ParamType.String,
+          isList: true,
         ),
       }.withoutNulls;
 
@@ -228,6 +248,11 @@ class HabitStruct extends FFFirebaseStruct {
           ParamType.DateTime,
           false,
         ),
+        goals: deserializeParam<String>(
+          data['goals'],
+          ParamType.String,
+          true,
+        ),
       );
 
   @override
@@ -245,7 +270,8 @@ class HabitStruct extends FFFirebaseStruct {
         dueDate == other.dueDate &&
         score == other.score &&
         hasDue == other.hasDue &&
-        createDate == other.createDate;
+        createDate == other.createDate &&
+        listEquality.equals(goals, other.goals);
   }
 
   @override
@@ -258,7 +284,8 @@ class HabitStruct extends FFFirebaseStruct {
         dueDate,
         score,
         hasDue,
-        createDate
+        createDate,
+        goals
       ]);
 }
 

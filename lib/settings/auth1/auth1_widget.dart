@@ -547,6 +547,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                     onPressed: () async {
                                                       logFirebaseEvent(
                                                           'AUTH1_PAGE_SIGN_IN_BTN_ON_TAP');
+                                                      Function() _navigate =
+                                                          () {};
                                                       logFirebaseEvent(
                                                           'Button_auth');
                                                       GoRouter.of(context)
@@ -567,10 +569,13 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                         return;
                                                       }
 
-                                                      context.goNamedAuth(
-                                                          HomePageWidget
-                                                              .routeName,
-                                                          context.mounted);
+                                                      _navigate = () =>
+                                                          context.goNamedAuth(
+                                                              HomePageWidget
+                                                                  .routeName,
+                                                              context.mounted);
+
+                                                      _navigate();
                                                     },
                                                     text: FFLocalizations.of(
                                                             context)
@@ -788,6 +793,9 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                                   () async {
                                                                 logFirebaseEvent(
                                                                     'AUTH1_CONTINUE_WITH_GOOGLE_BTN_ON_TAP');
+                                                                Function()
+                                                                    _navigate =
+                                                                    () {};
                                                                 logFirebaseEvent(
                                                                     'Button_auth');
                                                                 GoRouter.of(
@@ -801,12 +809,14 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                                     null) {
                                                                   return;
                                                                 }
+                                                                _navigate = () =>
+                                                                    context.goNamedAuth(
+                                                                        HomePageWidget
+                                                                            .routeName,
+                                                                        context
+                                                                            .mounted);
 
-                                                                context.goNamedAuth(
-                                                                    HomePageWidget
-                                                                        .routeName,
-                                                                    context
-                                                                        .mounted);
+                                                                _navigate();
                                                               },
                                                               text: FFLocalizations
                                                                       .of(context)
@@ -1443,7 +1453,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                           .doc(user.uid)
                                                           .update(
                                                               createUsersRecordData(
-                                                            points: 30,
+                                                            points: getRemoteConfigInt(
+                                                                'starting_bonus'),
                                                             phoneNumber: _model
                                                                 .phoneNoTextController
                                                                 .text,
@@ -1585,6 +1596,9 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                                   () async {
                                                                 logFirebaseEvent(
                                                                     'AUTH1_CONTINUE_WITH_GOOGLE_BTN_ON_TAP');
+                                                                Function()
+                                                                    _navigate =
+                                                                    () {};
                                                                 logFirebaseEvent(
                                                                     'Button_auth');
                                                                 GoRouter.of(
@@ -1598,20 +1612,14 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                                     null) {
                                                                   return;
                                                                 }
-                                                                logFirebaseEvent(
-                                                                    'Button_backend_call');
+                                                                _navigate = () =>
+                                                                    context.goNamedAuth(
+                                                                        HomePageWidget
+                                                                            .routeName,
+                                                                        context
+                                                                            .mounted);
 
-                                                                await currentUserReference!
-                                                                    .update(
-                                                                        createUsersRecordData(
-                                                                  points: 30,
-                                                                ));
-
-                                                                context.goNamedAuth(
-                                                                    HomePageWidget
-                                                                        .routeName,
-                                                                    context
-                                                                        .mounted);
+                                                                _navigate();
                                                               },
                                                               text: FFLocalizations
                                                                       .of(context)

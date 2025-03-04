@@ -13,12 +13,14 @@ class JournalsStruct extends FFFirebaseStruct {
     String? writer,
     bool? secret,
     String? title,
+    DateTime? lastUpdated,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _date = date,
         _contentJournal = contentJournal,
         _writer = writer,
         _secret = secret,
         _title = title,
+        _lastUpdated = lastUpdated,
         super(firestoreUtilData);
 
   // "date" field.
@@ -56,12 +58,20 @@ class JournalsStruct extends FFFirebaseStruct {
 
   bool hasTitle() => _title != null;
 
+  // "last_updated" field.
+  DateTime? _lastUpdated;
+  DateTime? get lastUpdated => _lastUpdated;
+  set lastUpdated(DateTime? val) => _lastUpdated = val;
+
+  bool hasLastUpdated() => _lastUpdated != null;
+
   static JournalsStruct fromMap(Map<String, dynamic> data) => JournalsStruct(
         date: data['date'] as DateTime?,
         contentJournal: data['content_journal'] as String?,
         writer: data['writer'] as String?,
         secret: data['secret'] as bool?,
         title: data['title'] as String?,
+        lastUpdated: data['last_updated'] as DateTime?,
       );
 
   static JournalsStruct? maybeFromMap(dynamic data) =>
@@ -73,6 +83,7 @@ class JournalsStruct extends FFFirebaseStruct {
         'writer': _writer,
         'secret': _secret,
         'title': _title,
+        'last_updated': _lastUpdated,
       }.withoutNulls;
 
   @override
@@ -96,6 +107,10 @@ class JournalsStruct extends FFFirebaseStruct {
         'title': serializeParam(
           _title,
           ParamType.String,
+        ),
+        'last_updated': serializeParam(
+          _lastUpdated,
+          ParamType.DateTime,
         ),
       }.withoutNulls;
 
@@ -126,6 +141,11 @@ class JournalsStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        lastUpdated: deserializeParam(
+          data['last_updated'],
+          ParamType.DateTime,
+          false,
+        ),
       );
 
   @override
@@ -138,12 +158,13 @@ class JournalsStruct extends FFFirebaseStruct {
         contentJournal == other.contentJournal &&
         writer == other.writer &&
         secret == other.secret &&
-        title == other.title;
+        title == other.title &&
+        lastUpdated == other.lastUpdated;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([date, contentJournal, writer, secret, title]);
+  int get hashCode => const ListEquality()
+      .hash([date, contentJournal, writer, secret, title, lastUpdated]);
 }
 
 JournalsStruct createJournalsStruct({
@@ -152,6 +173,7 @@ JournalsStruct createJournalsStruct({
   String? writer,
   bool? secret,
   String? title,
+  DateTime? lastUpdated,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -163,6 +185,7 @@ JournalsStruct createJournalsStruct({
       writer: writer,
       secret: secret,
       title: title,
+      lastUpdated: lastUpdated,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

@@ -1,8 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'journal_card_widget.dart' show JournalCardWidget;
+import 'journal_card_general_widget.dart' show JournalCardGeneralWidget;
 import 'package:flutter/material.dart';
 
-class JournalCardModel extends FlutterFlowModel<JournalCardWidget> {
+class JournalCardGeneralModel
+    extends FlutterFlowModel<JournalCardGeneralWidget> {
   ///  Local state fields for this component.
   /// Date of Journal
   DateTime? date;

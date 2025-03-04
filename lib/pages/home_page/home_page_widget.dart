@@ -1,9 +1,12 @@
 import '/components/habit_card/habit_card_widget.dart';
+import '/components/journal_card_general/journal_card_general_widget.dart';
 import '/components/journal_card_special/journal_card_special_widget.dart';
+import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +16,12 @@ import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+  const HomePageWidget({
+    super.key,
+    bool? startWalk,
+  }) : this.startWalk = startWalk ?? false;
+
+  final bool startWalk;
 
   static String routeName = 'HomePage';
   static String routePath = '/homePage';
@@ -59,7 +67,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         floatingActionButton: Align(
           alignment: AlignmentDirectional(1.0, 1.0),
           child: FloatingActionButton(
@@ -77,6 +85,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                     ),
                   },
                 );
+              } else {
+                logFirebaseEvent('FloatingActionButton_navigate_to');
+
+                context.pushNamed(AddJournalsWidget.routeName);
               }
             },
             backgroundColor: FlutterFlowTheme.of(context).primary,
@@ -89,7 +101,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
           ),
         ),
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           title: Align(
             alignment: AlignmentDirectional(-1.0, 0.0),
@@ -134,7 +146,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   logFirebaseEvent('IconButton_navigate_to');
 
                   context.pushNamed(
-                    ProfileWidget.routeName,
+                    MenuWidget.routeName,
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
@@ -205,181 +217,508 @@ class _HomePageWidgetState extends State<HomePageWidget>
                         children: [
                           Align(
                             alignment: AlignmentDirectional(0.0, -1.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                SingleChildScrollView(
-                                  primary: false,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 10.0, 0.0, 0.0),
-                                        child: SingleChildScrollView(
-                                          primary: false,
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Builder(
-                                                builder: (context) {
-                                                  final habits = FFAppState()
-                                                      .userhabit
-                                                      .map((e) => e)
-                                                      .toList();
-
-                                                  return ListView.builder(
-                                                    padding: EdgeInsets.zero,
-                                                    shrinkWrap: true,
-                                                    scrollDirection:
-                                                        Axis.vertical,
-                                                    itemCount: habits.length,
-                                                    itemBuilder:
-                                                        (context, habitsIndex) {
-                                                      final habitsItem =
-                                                          habits[habitsIndex];
-                                                      return wrapWithModel(
-                                                        model: _model
-                                                            .habitCardModels
-                                                            .getModel(
-                                                          habitsIndex
-                                                              .toString(),
-                                                          habitsIndex,
-                                                        ),
-                                                        updateCallback: () =>
-                                                            safeSetState(() {}),
-                                                        child: HabitCardWidget(
-                                                          key: Key(
-                                                            'Key4x1_${habitsIndex.toString()}',
-                                                          ),
-                                                          index: habitsIndex,
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                              ),
-                                            ]
-                                                .divide(SizedBox(height: 2.0))
-                                                .addToStart(
-                                                    SizedBox(height: 3.0)),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                if (FFAppState().userhabit.length <= 2)
-                                  Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 30.0, 0.0, 0.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          logFirebaseEvent(
-                                              'HOME_PAGE_PAGE_NEW_HABIT_BTN_ON_TAP');
-                                          logFirebaseEvent(
-                                              'Button_navigate_to');
-
-                                          context.pushNamed(
-                                            CreateHabitWidget.routeName,
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType
-                                                        .bottomToTop,
-                                              ),
-                                            },
-                                          );
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'uvyli3xa' /* New Habit */,
-                                        ),
-                                        icon: Icon(
-                                          Icons.plus_one,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          size: 30.0,
-                                        ),
-                                        options: FFButtonOptions(
-                                          height: 51.5,
+                            child: SingleChildScrollView(
+                              primary: false,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  SingleChildScrollView(
+                                    primary: false,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 16.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .accent2,
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .headlineLarge
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                letterSpacing: 0.0,
-                                              ),
-                                          elevation: 0.0,
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
+                                                  0.0, 10.0, 0.0, 0.0),
+                                          child: SingleChildScrollView(
+                                            primary: false,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Builder(
+                                                  builder: (context) {
+                                                    final habits = FFAppState()
+                                                        .userhabit
+                                                        .sortedList(
+                                                            keyOf: (e) =>
+                                                                e.score,
+                                                            desc: false)
+                                                        .map((e) => e)
+                                                        .toList();
+
+                                                    return ListView.builder(
+                                                      padding: EdgeInsets.zero,
+                                                      shrinkWrap: true,
+                                                      scrollDirection:
+                                                          Axis.vertical,
+                                                      itemCount: habits.length,
+                                                      itemBuilder: (context,
+                                                          habitsIndex) {
+                                                        final habitsItem =
+                                                            habits[habitsIndex];
+                                                        return wrapWithModel(
+                                                          model: _model
+                                                              .habitCardModels
+                                                              .getModel(
+                                                            habitsIndex
+                                                                .toString(),
+                                                            habitsIndex,
+                                                          ),
+                                                          updateCallback: () =>
+                                                              safeSetState(
+                                                                  () {}),
+                                                          child:
+                                                              HabitCardWidget(
+                                                            key: Key(
+                                                              'Key4x1_${habitsIndex.toString()}',
+                                                            ),
+                                                            index: habitsIndex,
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                              ]
+                                                  .divide(SizedBox(height: 2.0))
+                                                  .addToStart(
+                                                      SizedBox(height: 3.0)),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  if (FFAppState().userhabit.length <= 2)
+                                    Align(
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 30.0, 0.0, 0.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'HOME_PAGE_PAGE_NEW_HABIT_BTN_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Button_navigate_to');
+
+                                            context.pushNamed(
+                                              CreateHabitWidget.routeName,
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType
+                                                          .bottomToTop,
+                                                ),
+                                              },
+                                            );
+                                          },
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'uvyli3xa' /* New Habit */,
+                                          ),
+                                          icon: Icon(
+                                            Icons.plus_one,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 30.0,
+                                          ),
+                                          options: FFButtonOptions(
+                                            height: 51.5,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent2,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(16.0),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Builder(
-                                  builder: (context) {
-                                    final journal = functions
-                                        .arrayOfJournalIndexes(
-                                            FFAppState().userhabit.toList())
-                                        .toList();
-
-                                    return MasonryGridView.builder(
-                                      gridDelegate:
-                                          SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 10.0, 0.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 10.0, 0.0, 0.0),
+                                        child: FlutterFlowChoiceChips(
+                                          options: [
+                                            ChipData(FFLocalizations.of(context)
+                                                .getText(
+                                              'yj1jsi45' /* General */,
+                                            )),
+                                            ChipData(FFLocalizations.of(context)
+                                                .getText(
+                                              '493xzxkc' /* Habit */,
+                                            ))
+                                          ],
+                                          onChanged: (val) async {
+                                            safeSetState(() =>
+                                                _model.choiceChipsValue =
+                                                    val?.firstOrNull);
+                                            logFirebaseEvent(
+                                                'HOME_ChoiceChips_fvptjwms_ON_FORM_WIDGET');
+                                            if (_model.choiceChipsValue ==
+                                                'General') {
+                                              logFirebaseEvent(
+                                                  'ChoiceChips_page_view');
+                                              await _model
+                                                  .journalTypePageController
+                                                  ?.animateToPage(
+                                                1,
+                                                duration:
+                                                    Duration(milliseconds: 500),
+                                                curve: Curves.ease,
+                                              );
+                                            } else {
+                                              logFirebaseEvent(
+                                                  'ChoiceChips_page_view');
+                                              await _model
+                                                  .journalTypePageController
+                                                  ?.animateToPage(
+                                                1,
+                                                duration:
+                                                    Duration(milliseconds: 500),
+                                                curve: Curves.ease,
+                                              );
+                                            }
+                                          },
+                                          selectedChipStyle: ChipStyle(
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .info,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            iconColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .info,
+                                            iconSize: 16.0,
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
+                                          ),
+                                          unselectedChipStyle: ChipStyle(
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            iconColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryText,
+                                            iconSize: 16.0,
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          chipSpacing: 8.0,
+                                          rowSpacing: 8.0,
+                                          multiselect: false,
+                                          initialized:
+                                              _model.choiceChipsValue != null,
+                                          alignment: WrapAlignment.start,
+                                          controller: _model
+                                                  .choiceChipsValueController ??=
+                                              FormFieldController<List<String>>(
+                                            [
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'xo71txim' /* General */,
+                                              )
+                                            ],
+                                          ),
+                                          wrapped: true,
+                                        ),
                                       ),
-                                      crossAxisSpacing: 10.0,
-                                      mainAxisSpacing: 10.0,
-                                      itemCount: journal.length,
-                                      itemBuilder: (context, journalIndex) {
-                                        final journalItem =
-                                            journal[journalIndex];
-                                        return wrapWithModel(
-                                          model: _model.journalCardSpecialModels
-                                              .getModel(
-                                            journalIndex.toString(),
-                                            journalIndex,
-                                          ),
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: JournalCardSpecialWidget(
-                                            key: Key(
-                                              'Key9s7_${journalIndex.toString()}',
-                                            ),
-                                            journalAddress: journalItem,
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                                Expanded(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 500.0,
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 40.0),
+                                      child: PageView(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        controller:
+                                            _model.journalTypePageController ??=
+                                                PageController(initialPage: 1),
+                                        onPageChanged: (_) =>
+                                            safeSetState(() {}),
+                                        scrollDirection: Axis.horizontal,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 5.0, 0.0, 0.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(10.0, 0.0,
+                                                                10.0, 0.0),
+                                                    child: Builder(
+                                                      builder: (context) {
+                                                        final journal = functions
+                                                            .arrayOfJournalIndexes(
+                                                                FFAppState()
+                                                                    .userhabit
+                                                                    .toList())
+                                                            .sortedList(
+                                                                keyOf: (e) => FFAppState()
+                                                                    .userhabit
+                                                                    .elementAtOrNull(e
+                                                                        .habitidx)!
+                                                                    .journal
+                                                                    .elementAtOrNull(
+                                                                        e.journalidx)!
+                                                                    .date!,
+                                                                desc: true)
+                                                            .toList();
+
+                                                        return MasonryGridView
+                                                            .builder(
+                                                          gridDelegate:
+                                                              SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                                                            crossAxisCount: 2,
+                                                          ),
+                                                          crossAxisSpacing:
+                                                              10.0,
+                                                          mainAxisSpacing: 10.0,
+                                                          itemCount:
+                                                              journal.length,
+                                                          itemBuilder: (context,
+                                                              journalIndex) {
+                                                            final journalItem =
+                                                                journal[
+                                                                    journalIndex];
+                                                            return InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'HOME_PAGE_PAGE_Container_9s7bpkod_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'journal_Card_Special_navigate_to');
+
+                                                                context
+                                                                    .pushNamed(
+                                                                  CommentReadWidget
+                                                                      .routeName,
+                                                                  queryParameters:
+                                                                      {
+                                                                    'indexHabit':
+                                                                        serializeParam(
+                                                                      journalItem
+                                                                          .habitidx,
+                                                                      ParamType
+                                                                          .int,
+                                                                    ),
+                                                                    'indexJournal':
+                                                                        serializeParam(
+                                                                      journalItem
+                                                                          .journalidx,
+                                                                      ParamType
+                                                                          .int,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                              child:
+                                                                  wrapWithModel(
+                                                                model: _model
+                                                                    .journalCardSpecialModels
+                                                                    .getModel(
+                                                                  journalIndex
+                                                                      .toString(),
+                                                                  journalIndex,
+                                                                ),
+                                                                updateCallback: () =>
+                                                                    safeSetState(
+                                                                        () {}),
+                                                                child:
+                                                                    JournalCardSpecialWidget(
+                                                                  key: Key(
+                                                                    'Key9s7_${journalIndex.toString()}',
+                                                                  ),
+                                                                  journalAddress:
+                                                                      journalItem,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                child: Builder(
+                                                  builder: (context) {
+                                                    final journals =
+                                                        FFAppState()
+                                                            .journalswritten
+                                                            .sortedList(
+                                                                keyOf: (e) =>
+                                                                    e.date!,
+                                                                desc: true)
+                                                            .map((e) => e)
+                                                            .toList();
+
+                                                    return MasonryGridView
+                                                        .builder(
+                                                      gridDelegate:
+                                                          SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 2,
+                                                      ),
+                                                      crossAxisSpacing: 2.0,
+                                                      mainAxisSpacing: 1.0,
+                                                      itemCount:
+                                                          journals.length,
+                                                      itemBuilder: (context,
+                                                          journalsIndex) {
+                                                        final journalsItem =
+                                                            journals[
+                                                                journalsIndex];
+                                                        return InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'HOME_PAGE_PAGE_Container_ak1p3dht_ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'journal_card_general_navigate_to');
+
+                                                            context.pushNamed(
+                                                              AddJournalsWidget
+                                                                  .routeName,
+                                                              queryParameters: {
+                                                                'indexJournal':
+                                                                    serializeParam(
+                                                                  journalsIndex,
+                                                                  ParamType.int,
+                                                                ),
+                                                              }.withoutNulls,
+                                                            );
+                                                          },
+                                                          child: wrapWithModel(
+                                                            model: _model
+                                                                .journalCardGeneralModels
+                                                                .getModel(
+                                                              journalsIndex
+                                                                  .toString(),
+                                                              journalsIndex,
+                                                            ),
+                                                            updateCallback: () =>
+                                                                safeSetState(
+                                                                    () {}),
+                                                            updateOnChange:
+                                                                true,
+                                                            child:
+                                                                JournalCardGeneralWidget(
+                                                              key: Key(
+                                                                'Keyak1_${journalsIndex.toString()}',
+                                                              ),
+                                                              content: journalsItem
+                                                                  .contentJournal,
+                                                              writer:
+                                                                  journalsItem
+                                                                      .title,
+                                                              dateJournal:
+                                                                  journalsItem
+                                                                      .date!,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

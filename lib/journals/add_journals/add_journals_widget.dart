@@ -1,13 +1,23 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'add_journals_model.dart';
 export 'add_journals_model.dart';
 
 class AddJournalsWidget extends StatefulWidget {
-  const AddJournalsWidget({super.key});
+  const AddJournalsWidget({
+    super.key,
+    this.indexJournal,
+  });
+
+  /// Journal Index if Updating
+  final int? indexJournal;
 
   static String routeName = 'add_journals';
   static String routePath = '/addJournals';
@@ -28,11 +38,48 @@ class _AddJournalsWidgetState extends State<AddJournalsWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'add_journals'});
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ADD_JOURNALS_add_journals_ON_INIT_STATE');
+      if (widget.indexJournal != null) {
+        logFirebaseEvent('add_journals_set_form_field');
+        safeSetState(() {
+          _model.journalFieldTextController?.text = FFAppState()
+              .journalswritten
+              .elementAtOrNull(widget.indexJournal!)!
+              .contentJournal;
+        });
+        logFirebaseEvent('add_journals_set_form_field');
+        safeSetState(() {
+          _model.titleFieldTextController?.text = FFAppState()
+              .journalswritten
+              .elementAtOrNull(widget.indexJournal!)!
+              .title;
+        });
+      } else {
+        logFirebaseEvent('add_journals_set_form_field');
+        safeSetState(() {
+          _model.journalFieldTextController?.text = 'Today I';
+          _model.journalFieldFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.journalFieldTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.journalFieldTextController!.text.length,
+            );
+          });
+        });
+      }
+    });
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.journalFieldTextController ??= TextEditingController();
+    _model.journalFieldFocusNode ??= FocusNode();
+
+    _model.titleFieldTextController ??= TextEditingController(
+        text: FFAppState()
+            .journalswritten
+            .elementAtOrNull(widget.indexJournal!)
+            ?.title);
+    _model.titleFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -44,6 +91,8 @@ class _AddJournalsWidgetState extends State<AddJournalsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -95,9 +144,10 @@ class _AddJournalsWidgetState extends State<AddJournalsWidget> {
                 child: Container(
                   width: double.infinity,
                   child: TextFormField(
-                    controller: _model.textController1,
-                    focusNode: _model.textFieldFocusNode1,
+                    controller: _model.journalFieldTextController,
+                    focusNode: _model.journalFieldFocusNode,
                     autofocus: false,
+                    textCapitalization: TextCapitalization.none,
                     obscureText: false,
                     decoration: InputDecoration(
                       isDense: false,
@@ -119,7 +169,8 @@ class _AddJournalsWidgetState extends State<AddJournalsWidget> {
                       errorBorder: InputBorder.none,
                       focusedErrorBorder: InputBorder.none,
                       filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
@@ -128,8 +179,8 @@ class _AddJournalsWidgetState extends State<AddJournalsWidget> {
                     maxLines: null,
                     minLines: 1,
                     cursorColor: FlutterFlowTheme.of(context).primaryText,
-                    validator:
-                        _model.textController1Validator.asValidator(context),
+                    validator: _model.journalFieldTextControllerValidator
+                        .asValidator(context),
                   ),
                 ),
               ),
@@ -145,8 +196,8 @@ class _AddJournalsWidgetState extends State<AddJournalsWidget> {
                     child: Container(
                       width: 200.0,
                       child: TextFormField(
-                        controller: _model.textController2,
-                        focusNode: _model.textFieldFocusNode2,
+                        controller: _model.titleFieldTextController,
+                        focusNode: _model.titleFieldFocusNode,
                         autofocus: false,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -201,14 +252,50 @@ class _AddJournalsWidgetState extends State<AddJournalsWidget> {
                               letterSpacing: 0.0,
                             ),
                         cursorColor: FlutterFlowTheme.of(context).primaryText,
-                        validator: _model.textController2Validator
+                        validator: _model.titleFieldTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      logFirebaseEvent('ADD_JOURNALS_PAGE_SAVE_BTN_ON_TAP');
+                      if (widget.indexJournal != null) {
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().updateJournalswrittenAtIndex(
+                          widget.indexJournal!,
+                          (e) => e
+                            ..contentJournal =
+                                _model.journalFieldTextController.text
+                            ..title = _model.titleFieldTextController.text
+                            ..lastUpdated = getCurrentTimestamp,
+                        );
+                        FFAppState().update(() {});
+                      } else {
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().addToJournalswritten(JournalsStruct(
+                          date: getCurrentTimestamp,
+                          contentJournal:
+                              _model.journalFieldTextController.text,
+                          writer: 'user',
+                          secret: false,
+                          title: _model.titleFieldTextController.text,
+                          lastUpdated: getCurrentTimestamp,
+                        ));
+                        FFAppState().update(() {});
+                      }
+
+                      logFirebaseEvent('Button_navigate_to');
+
+                      context.pushNamed(
+                        HomePageWidget.routeName,
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.topToBottom,
+                          ),
+                        },
+                      );
                     },
                     text: FFLocalizations.of(context).getText(
                       'fqbnzjj3' /* Save */,

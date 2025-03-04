@@ -4,12 +4,14 @@ import '/components/journal_page/journal_page_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:sticky_headers/sticky_headers.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'habit_view_model.dart';
 export 'habit_view_model.dart';
@@ -18,10 +20,13 @@ class HabitViewWidget extends StatefulWidget {
   const HabitViewWidget({
     super.key,
     required this.index,
-  });
+    bool? showWalk,
+  }) : this.showWalk = showWalk ?? false;
 
   /// Location of this habit in the list
   final int? index;
+
+  final bool showWalk;
 
   static String routeName = 'habit_view';
   static String routePath = '/habitView';
@@ -122,32 +127,6 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
           ),
         ],
       ),
-      'containerOnPageLoadAnimation3': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 300.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 300.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
-          ),
-          TiltEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 300.0.ms,
-            begin: Offset(0.698, 0),
-            end: Offset(0, 0),
-          ),
-        ],
-      ),
     });
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -162,7 +141,12 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
     // On page dispose action.
     () async {
       logFirebaseEvent('HABIT_VIEW_PAGE_habit_view_ON_DISPOSE');
-      if (_model.doneToday <= 0) {
+      if (FFAppState()
+              .userhabit
+              .elementAtOrNull(widget.index!)!
+              .dates
+              .length <=
+          0) {
         logFirebaseEvent('habit_view_update_app_state');
         FFAppState().updateUserhabitAtIndex(
           widget.index!,
@@ -188,10 +172,6 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
         );
         FFAppState().update(() {});
       }
-
-      logFirebaseEvent('habit_view_update_app_state');
-      FFAppState().isDarkMode = false;
-      safeSetState(() {});
     }();
 
     _model.dispose();
@@ -234,37 +214,31 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  'ztln9x0f' /* Habit Details */,
-                ),
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Inter',
-                      letterSpacing: 0.0,
-                    ),
-              ),
-              if (FFAppState()
-                      .userhabit
-                      .elementAtOrNull(widget.index!)
-                      ?.hasDue ??
-                  true)
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                  child: Text(
-                    'Due ${dateTimeFormat(
-                      "relative",
-                      FFAppState()
-                          .userhabit
-                          .elementAtOrNull(widget.index!)
-                          ?.dueDate,
-                      locale: FFLocalizations.of(context).languageCode,
-                    )}',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          letterSpacing: 0.0,
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        valueOrDefault<String>(
+                          FFAppState()
+                              .userhabit
+                              .elementAtOrNull(widget.index!)
+                              ?.title,
+                          'Name Habit',
                         ),
+                        style: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
+              ),
             ],
           ),
           actions: [
@@ -315,7 +289,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          'Habit not deleted',
+                          'Habit Removed',
                           style: TextStyle(
                             color: FlutterFlowTheme.of(context).primaryText,
                           ),
@@ -325,6 +299,9 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                         backgroundColor: FlutterFlowTheme.of(context).accent3,
                       ),
                     );
+                    logFirebaseEvent('Icon_navigate_to');
+
+                    context.pushNamed(HomePageWidget.routeName);
                   } else {
                     logFirebaseEvent('Icon_navigate_back');
                     context.safePop();
@@ -383,122 +360,69 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                          EdgeInsetsDirectional.fromSTEB(10.0, 12.0, 10.0, 8.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Align(
-                            alignment: AlignmentDirectional(1.0, 0.0),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 5.0, 5.0, 0.0),
-                              child: Text(
-                                valueOrDefault<String>(
-                                  dateTimeFormat(
-                                    "relative",
-                                    FFAppState()
-                                        .userhabit
-                                        .elementAtOrNull(widget.index!)
-                                        ?.createDate,
-                                    locale: FFLocalizations.of(context)
-                                        .languageCode,
-                                  ),
-                                  'Created date',
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 5.0, 10.0, 0.0),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(-1.0, -1.0),
-                                        child: AutoSizeText(
-                                          valueOrDefault<String>(
-                                            FFAppState()
-                                                .userhabit
-                                                .elementAtOrNull(widget.index!)
-                                                ?.title,
-                                            'Habit Name',
-                                          ).maybeHandleOverflow(
-                                            maxChars: 30,
-                                            replacement: '…',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineSmall
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Flexible(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: Text(
-                                    valueOrDefault<String>(
-                                      FFAppState()
-                                          .userhabit
-                                          .elementAtOrNull(widget.index!)
-                                          ?.description,
-                                      'Description a very very long sentences will be here and lots of space will be used here so need to be cautious about this space and look',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          letterSpacing: 0.0,
-                                        ),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    FFAppState()
+                                        .userhabit
+                                        .elementAtOrNull(widget.index!)
+                                        ?.description,
+                                    'Description a very very long sentences will be here and lots of space will be used here so need to be cautious about this space and look',
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 10.0, 0.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    '00fseq0w' /* Today */,
-                                  ),
+                                  textAlign: TextAlign.start,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         letterSpacing: 0.0,
                                       ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 10.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      valueOrDefault<String>(
+                                        _model.totalDone.toString(),
+                                        '0',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    Text(
+                                      FFLocalizations.of(context).getText(
+                                        'skcugqzw' /*  Overall */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -721,7 +645,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                     Text(
                                       valueOrDefault<String>(
                                         _model.doneToday.toString(),
-                                        '0',
+                                        '1',
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .titleSmall
@@ -734,32 +658,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                     ),
                                     Text(
                                       FFLocalizations.of(context).getText(
-                                        'to2zb9ob' /* / */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    Text(
-                                      valueOrDefault<String>(
-                                        _model.totalDone.toString(),
-                                        '0',
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        'skcugqzw' /*  Overall */,
+                                        'wazbgm6r' /*  Today */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -772,6 +671,202 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                 ),
                               ],
                             ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'HABIT_VIEW_PAGE_ask_ai_button_ON_TAP');
+                                  logFirebaseEvent(
+                                      'ask_ai_button_bottom_sheet');
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    enableDrag: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          FocusScope.of(context).unfocus();
+                                          FocusManager.instance.primaryFocus
+                                              ?.unfocus();
+                                        },
+                                        child: Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: AskAIPageWidget(
+                                            index: widget.index!,
+                                            comments: _model.allComments,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(() {}));
+                                },
+                                text: FFLocalizations.of(context).getText(
+                                  'yy1wk8k0' /* Ask AI */,
+                                ),
+                                icon: FaIcon(
+                                  FontAwesomeIcons.robot,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  size: 15.0,
+                                ),
+                                options: FFButtonOptions(
+                                  height: 33.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  iconAlignment: IconAlignment.start,
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                      ),
+                                  elevation: 0.0,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 20.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    if (valueOrDefault<bool>(
+                                      _model.doneToday >= 1,
+                                      true,
+                                    ))
+                                      Opacity(
+                                        opacity: 0.7,
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'HABIT_VIEW_PAGE_Icon_g7jx3f5h_ON_TAP');
+                                            if (_model.doneToday > 0) {
+                                              logFirebaseEvent(
+                                                  'Icon_update_page_state');
+                                              _model.dateLists = functions
+                                                  .removeTodays(
+                                                      _model.dateLists.toList())
+                                                  .toList()
+                                                  .cast<DateTime>();
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'Icon_update_app_state');
+                                              FFAppState()
+                                                  .updateUserhabitAtIndex(
+                                                widget.index!,
+                                                (e) => e
+                                                  ..updateDates(
+                                                    (e) => e.removeAt(
+                                                        functions.numberOfDays(
+                                                            _model.dateLists
+                                                                .toList())),
+                                                  ),
+                                              );
+                                              safeSetState(() {});
+                                            }
+                                            logFirebaseEvent(
+                                                'Icon_update_page_state');
+                                            _model.dateLists = FFAppState()
+                                                .userhabit
+                                                .elementAtOrNull(
+                                                    widget.index!)!
+                                                .dates
+                                                .toList()
+                                                .cast<DateTime>();
+                                            safeSetState(() {});
+                                            logFirebaseEvent(
+                                                'Icon_update_page_state');
+                                            _model.doneToday =
+                                                valueOrDefault<int>(
+                                              functions.numberOfTimesToday(
+                                                  _model.dateLists.toList()),
+                                              0,
+                                            );
+                                            _model.totalDone =
+                                                functions.numberOfDays(
+                                                    _model.dateLists.toList());
+                                            _model.dateLists = FFAppState()
+                                                .userhabit
+                                                .elementAtOrNull(
+                                                    widget.index!)!
+                                                .dates
+                                                .toList()
+                                                .cast<DateTime>();
+                                            safeSetState(() {});
+                                          },
+                                          child: FaIcon(
+                                            FontAwesomeIcons.minusSquare,
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                      ),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'HABIT_VIEW_PAGE_Icon_mri6sxxd_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Icon_update_app_state');
+                                        FFAppState().updateUserhabitAtIndex(
+                                          widget.index!,
+                                          (e) => e
+                                            ..updateDates(
+                                              (e) => e.add(getCurrentTimestamp),
+                                            ),
+                                        );
+                                        FFAppState().update(() {});
+                                        logFirebaseEvent(
+                                            'Icon_update_page_state');
+                                        _model.dateLists = FFAppState()
+                                            .userhabit
+                                            .elementAtOrNull(widget.index!)!
+                                            .dates
+                                            .toList()
+                                            .cast<DateTime>();
+                                        logFirebaseEvent(
+                                            'Icon_update_page_state');
+                                        _model.doneToday = valueOrDefault<int>(
+                                          functions.numberOfTimesToday(
+                                              _model.dateLists.toList()),
+                                          0,
+                                        );
+                                        _model.totalDone =
+                                            functions.numberOfDays(
+                                                _model.dateLists.toList());
+                                        safeSetState(() {});
+                                      },
+                                      child: FaIcon(
+                                        FontAwesomeIcons.plusSquare,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                  ]
+                                      .divide(SizedBox(width: 20.0))
+                                      .around(SizedBox(width: 20.0)),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -805,131 +900,64 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                         children: [
                           StickyHeader(
                             overlapHeaders: false,
-                            header: Container(
-                              width: double.infinity,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                              ),
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: Column(
+                            header: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 10.0, 12.0, 0.0),
+                              child: Row(
                                 mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 10.0, 12.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'mbkn9ltj' /* Comments */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                letterSpacing: 0.0,
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      'mbkn9ltj' /* Comments */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'HABIT_VIEW_PAGE_Icon_2pkbrnjt_ON_TAP');
+                                      logFirebaseEvent('Icon_bottom_sheet');
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(context).unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: Container(
+                                                height: 350.0,
+                                                child: JournalPageWidget(
+                                                  index: widget.index!,
+                                                ),
                                               ),
-                                        ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            logFirebaseEvent(
-                                                'HABIT_VIEW_PAGE_Icon_jqn84o3g_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Icon_bottom_sheet');
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return GestureDetector(
-                                                  onTap: () {
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child: AskAIPageWidget(
-                                                      index: widget.index!,
-                                                      comments:
-                                                          _model.allComments,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ).then(
-                                                (value) => safeSetState(() {}));
-                                          },
-                                          child: Icon(
-                                            Icons.smart_toy,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            logFirebaseEvent(
-                                                'HABIT_VIEW_PAGE_Icon_2pkbrnjt_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Icon_bottom_sheet');
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              context: context,
-                                              builder: (context) {
-                                                return GestureDetector(
-                                                  onTap: () {
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child: Container(
-                                                      height: 350.0,
-                                                      child: JournalPageWidget(
-                                                        index: widget.index!,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ).then(
-                                                (value) => safeSetState(() {}));
-                                          },
-                                          child: Icon(
-                                            Icons.comment_bank,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                      ],
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
+                                    },
+                                    child: FaIcon(
+                                      FontAwesomeIcons.commentMedical,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
                                     ),
                                   ),
                                 ],
@@ -955,11 +983,13 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                                 .toList() ??
                                             [];
 
-                                        return ListView.builder(
+                                        return ListView.separated(
                                           padding: EdgeInsets.zero,
                                           shrinkWrap: true,
                                           scrollDirection: Axis.vertical,
                                           itemCount: journalList.length,
+                                          separatorBuilder: (_, __) =>
+                                              SizedBox(height: 4.0),
                                           itemBuilder:
                                               (context, journalListIndex) {
                                             final journalListItem =
@@ -1010,7 +1040,7 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                                                               .elementAtOrNull(
                                                                   journalListIndex))
                                                           ?.writer,
-                                                      '[User]',
+                                                      '[Writer]',
                                                     ),
                                                     content:
                                                         valueOrDefault<String>(
@@ -1054,28 +1084,6 @@ class _HabitViewWidgetState extends State<HabitViewWidget>
                     ),
                   ).animateOnPageLoad(
                       animationsMap['containerOnPageLoadAnimation2']!),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 24.0),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 3.0,
-                          color: Color(0x33000000),
-                          offset: Offset(
-                            0.0,
-                            1.0,
-                          ),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ).animateOnPageLoad(
-                      animationsMap['containerOnPageLoadAnimation3']!),
                 ),
               ],
             ),

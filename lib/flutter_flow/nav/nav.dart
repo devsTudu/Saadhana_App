@@ -88,7 +88,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: HomePageWidget.routeName,
           path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
+          builder: (context, params) => HomePageWidget(
+            startWalk: params.getParam(
+              'startWalk',
+              ParamType.bool,
+            ),
+          ),
         ),
         FFRoute(
           name: CreateHabitWidget.routeName,
@@ -103,6 +108,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'index',
               ParamType.int,
             ),
+            showWalk: params.getParam(
+              'showWalk',
+              ParamType.bool,
+            ),
           ),
         ),
         FFRoute(
@@ -111,9 +120,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => Auth1Widget(),
         ),
         FFRoute(
-          name: ProfileWidget.routeName,
-          path: ProfileWidget.routePath,
-          builder: (context, params) => ProfileWidget(),
+          name: MenuWidget.routeName,
+          path: MenuWidget.routePath,
+          builder: (context, params) => MenuWidget(),
         ),
         FFRoute(
           name: CommentReadWidget.routeName,
@@ -150,14 +159,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => StartPage1Widget(),
         ),
         FFRoute(
-          name: StartPageAddHabitsWidget.routeName,
-          path: StartPageAddHabitsWidget.routePath,
-          builder: (context, params) => StartPageAddHabitsWidget(),
-        ),
-        FFRoute(
           name: AddJournalsWidget.routeName,
           path: AddJournalsWidget.routePath,
-          builder: (context, params) => AddJournalsWidget(),
+          builder: (context, params) => AddJournalsWidget(
+            indexJournal: params.getParam(
+              'indexJournal',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: HabitSettingPageWidget.routeName,
+          path: HabitSettingPageWidget.routePath,
+          builder: (context, params) => HabitSettingPageWidget(),
+        ),
+        FFRoute(
+          name: SupportPageWidget.routeName,
+          path: SupportPageWidget.routePath,
+          builder: (context, params) => SupportPageWidget(),
+        ),
+        FFRoute(
+          name: WalkthroughsWidget.routeName,
+          path: WalkthroughsWidget.routePath,
+          builder: (context, params) => WalkthroughsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

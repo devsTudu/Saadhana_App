@@ -132,8 +132,10 @@ class _WorkinZoneWidgetState extends State<WorkinZoneWidget> {
                   ),
                 ),
                 FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    logFirebaseEvent('WORKIN_ZONE_PAGE_GO_BACK_BTN_ON_TAP');
+                    logFirebaseEvent('Button_navigate_back');
+                    context.safePop();
                   },
                   text: FFLocalizations.of(context).getText(
                     'zw5jqytj' /* Go Back */,

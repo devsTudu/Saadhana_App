@@ -14,5 +14,12 @@ service cloud.firestore {
       allow write: if false;
       allow delete: if false;
     }
+
+    match /FAQs/{document} {
+      allow create: if false;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
   }
 }

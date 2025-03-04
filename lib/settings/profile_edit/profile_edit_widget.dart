@@ -4,7 +4,10 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'profile_edit_model.dart';
 export 'profile_edit_model.dart';
 
@@ -30,6 +33,29 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'profile_edit'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('PROFILE_EDIT_profile_edit_ON_INIT_STATE');
+      if (currentUserEmail == '') {
+        logFirebaseEvent('profile_edit_alert_dialog');
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Profile'),
+              content: Text('You have not signed In completely'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
+
     _model.nameTextController ??=
         TextEditingController(text: currentUserDisplayName);
     _model.nameFocusNode ??= FocusNode();
@@ -67,15 +93,17 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
             color: FlutterFlowTheme.of(context).info,
             size: 25.0,
           ),
-          onPressed: () {
-            print('IconButton pressed ...');
+          onPressed: () async {
+            logFirebaseEvent('PROFILE_EDIT_arrow_back_rounded_ICN_ON_T');
+            logFirebaseEvent('IconButton_navigate_back');
+            context.safePop();
           },
         ),
         title: Text(
           FFLocalizations.of(context).getText(
             '6ioe2w4y' /* Complete Profile */,
           ),
-          style: FlutterFlowTheme.of(context).titleSmall.override(
+          style: FlutterFlowTheme.of(context).titleMedium.override(
                 fontFamily: 'Readex Pro',
                 letterSpacing: 0.0,
               ),
@@ -304,7 +332,15 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                         ),
                       ],
                     ),
-                    if (!currentUserEmailVerified)
+                    if (() {
+                      if (currentUserEmailVerified) {
+                        return false;
+                      } else if (currentUserEmail == '') {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    }())
                       AuthUserStreamWidget(
                         builder: (context) => Row(
                           mainAxisSize: MainAxisSize.max,
@@ -386,6 +422,23 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                                 context: context,
                               );
                               safeSetState(() {});
+
+                              logFirebaseEvent('Text_show_snack_bar');
+                              ScaffoldMessenger.of(context).clearSnackBars();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Verification Mail sent, please check',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                              );
                             },
                             child: Text(
                               FFLocalizations.of(context).getText(
@@ -485,58 +538,106 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   ],
                 ),
               ),
-              FFButtonWidget(
-                onPressed: () async {
-                  logFirebaseEvent('PROFILE_EDIT_SAVE_CHANGES_BTN_ON_TAP');
-                  logFirebaseEvent('Button_auth');
-                  if (_model.emailTextController.text.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Email required!',
-                        ),
-                      ),
-                    );
-                    return;
-                  }
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    logFirebaseEvent('PROFILE_EDIT_SAVE_CHANGES_BTN_ON_TAP');
+                    if (currentUserEmail != _model.emailTextController.text) {
+                      logFirebaseEvent('Button_auth');
+                      if (_model.emailTextController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Email required!',
+                            ),
+                          ),
+                        );
+                        return;
+                      }
 
-                  await authManager.updateEmail(
-                    email: _model.emailTextController.text,
-                    context: context,
-                  );
-                  safeSetState(() {});
+                      await authManager.updateEmail(
+                        email: _model.emailTextController.text,
+                        context: context,
+                      );
+                      safeSetState(() {});
+                    }
+                    logFirebaseEvent('Button_backend_call');
 
-                  logFirebaseEvent('Button_backend_call');
-
-                  await currentUserReference!.update(createUsersRecordData(
-                    email: '',
-                    displayName: _model.nameTextController.text,
-                    phoneNumber: _model.phoneNumberTextController.text,
-                  ));
-                },
-                text: FFLocalizations.of(context).getText(
-                  'qdvmqape' /* Save Changes */,
-                ),
-                options: FFButtonOptions(
-                  width: 270.0,
-                  height: 50.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: FlutterFlowTheme.of(context).primary,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Readex Pro',
-                        color: Colors.white,
-                        letterSpacing: 0.0,
-                      ),
-                  elevation: 3.0,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
+                    await currentUserReference!.update(createUsersRecordData(
+                      displayName: _model.nameTextController.text,
+                      phoneNumber: _model.phoneNumberTextController.text,
+                    ));
+                  },
+                  text: FFLocalizations.of(context).getText(
+                    'qdvmqape' /* Save Changes */,
                   ),
-                  borderRadius: BorderRadius.circular(12.0),
+                  icon: FaIcon(
+                    FontAwesomeIcons.solidSave,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    size: 35.0,
+                  ),
+                  options: FFButtonOptions(
+                    width: 270.0,
+                    height: 50.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).secondary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
+                    elevation: 3.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
                 ),
               ),
+              if (currentUserEmail == '')
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent('PROFILE_EDIT_PAGE_SIGN_IN_BTN_ON_TAP');
+                      logFirebaseEvent('Button_navigate_to');
+
+                      context.pushNamed(Auth1Widget.routeName);
+                    },
+                    text: FFLocalizations.of(context).getText(
+                      'vtlyqi6o' /* Sign In */,
+                    ),
+                    icon: FaIcon(
+                      FontAwesomeIcons.portrait,
+                      color: FlutterFlowTheme.of(context).alternate,
+                      size: 35.0,
+                    ),
+                    options: FFButtonOptions(
+                      width: 270.0,
+                      height: 50.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Readex Pro',
+                                color: Colors.white,
+                                letterSpacing: 0.0,
+                              ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                ),
             ],
           ),
         ),

@@ -148,7 +148,12 @@ class _AskAIPageWidgetState extends State<AskAIPageWidget> {
                                   0.0, 0.0, 16.0, 0.0),
                               child: FlutterFlowDropDown<String>(
                                 controller: _model.dropDownValueController ??=
-                                    FormFieldController<String>(null),
+                                    FormFieldController<String>(
+                                  _model.dropDownValue ??=
+                                      FFLocalizations.of(context).getText(
+                                    'v3ccgvjx' /* Motivate */,
+                                  ),
+                                ),
                                 options:
                                     AIMood.values.map((e) => e.name).toList(),
                                 onChanged: (val) async {
@@ -187,6 +192,7 @@ class _AskAIPageWidgetState extends State<AskAIPageWidget> {
                                 margin: EdgeInsetsDirectional.fromSTEB(
                                     12.0, 4.0, 12.0, 4.0),
                                 hidesUnderline: true,
+                                isOverButton: false,
                                 isSearchable: false,
                                 isMultiSelect: false,
                               ),

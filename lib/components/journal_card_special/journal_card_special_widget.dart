@@ -2,7 +2,6 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
 import 'journal_card_special_model.dart';
 export 'journal_card_special_model.dart';
@@ -115,20 +114,27 @@ class _JournalCardSpecialWidgetState extends State<JournalCardSpecialWidget> {
                 ],
               ),
             ),
-            Align(
-              alignment: AlignmentDirectional(-1.0, -1.0),
-              child: MarkdownBody(
-                data: valueOrDefault<String>(
-                  (FFAppState()
-                          .userhabit
-                          .elementAtOrNull(widget.journalAddress!.habitidx)
-                          ?.journal
-                          .elementAtOrNull(widget.journalAddress!.journalidx))
-                      ?.contentJournal,
-                  'comment',
+            Expanded(
+              child: Align(
+                alignment: AlignmentDirectional(-1.0, -1.0),
+                child: Text(
+                  valueOrDefault<String>(
+                    (FFAppState()
+                            .userhabit
+                            .elementAtOrNull(widget.journalAddress!.habitidx)
+                            ?.journal
+                            .elementAtOrNull(
+                                widget.journalAddress!.journalidx))
+                        ?.contentJournal,
+                    'comment',
+                  ).maybeHandleOverflow(
+                    maxChars: 150,
+                  ),
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
                 ),
-                selectable: true,
-                onTapLink: (_, url, __) => launchURL(url!),
               ),
             ),
           ],

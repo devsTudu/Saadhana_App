@@ -1,5 +1,6 @@
 import '/components/comment_block/comment_block_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'habit_view_widget.dart' show HabitViewWidget;
 import 'package:flutter/material.dart';
 

@@ -56,6 +56,9 @@ class FFAppState extends ChangeNotifier {
                   .toList() ??
               _journalswritten;
     });
+    await _safeInitAsync(() async {
+      _goals = await secureStorage.getStringList('ff_goals') ?? _goals;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -136,10 +139,7 @@ class FFAppState extends ChangeNotifier {
   }
 
   /// Journals Written
-  List<JournalsStruct> _journalswritten = [
-    JournalsStruct.fromSerializableMap(jsonDecode(
-        '{\"date\":\"1740569425097\",\"content_journal\":\"Hello World\",\"writer\":\"Hello World\",\"secret\":\"false\"}'))
-  ];
+  List<JournalsStruct> _journalswritten = [];
   List<JournalsStruct> get journalswritten => _journalswritten;
   set journalswritten(List<JournalsStruct> value) {
     _journalswritten = value;
@@ -182,6 +182,55 @@ class FFAppState extends ChangeNotifier {
     journalswritten.insert(index, value);
     secureStorage.setStringList('ff_journalswritten',
         _journalswritten.map((x) => x.serialize()).toList());
+  }
+
+  /// Goals to improve in habit
+  List<String> _goals = [
+    'Family',
+    'Health',
+    'Academic',
+    'Career',
+    'Finance',
+    'Diet',
+    'Spiritual',
+    'Knowledge'
+  ];
+  List<String> get goals => _goals;
+  set goals(List<String> value) {
+    _goals = value;
+    secureStorage.setStringList('ff_goals', value);
+  }
+
+  void deleteGoals() {
+    secureStorage.delete(key: 'ff_goals');
+  }
+
+  void addToGoals(String value) {
+    goals.add(value);
+    secureStorage.setStringList('ff_goals', _goals);
+  }
+
+  void removeFromGoals(String value) {
+    goals.remove(value);
+    secureStorage.setStringList('ff_goals', _goals);
+  }
+
+  void removeAtIndexFromGoals(int index) {
+    goals.removeAt(index);
+    secureStorage.setStringList('ff_goals', _goals);
+  }
+
+  void updateGoalsAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    goals[index] = updateFn(_goals[index]);
+    secureStorage.setStringList('ff_goals', _goals);
+  }
+
+  void insertAtIndexInGoals(int index, String value) {
+    goals.insert(index, value);
+    secureStorage.setStringList('ff_goals', _goals);
   }
 }
 
